@@ -13,6 +13,7 @@
   header{text-align:center;padding:20px 10px 10px;border-bottom:1px solid #c9a84c44}
   header h1{font-size:clamp(1.6rem,4vw,2.8rem);color:var(--gold2);text-shadow:0 0 30px #c9a84c88;letter-spacing:3px}
   header p{color:#c9a84c99;font-style:italic;font-size:1rem;margin-top:4px}
+  header .objective-subtitle{max-width:760px;margin:8px auto 0;color:#f5ecd7;font-style:normal;font-size:clamp(.9rem,2vw,1.08rem);line-height:1.35}
   .tabs{display:flex;justify-content:center;gap:6px;padding:14px 10px;flex-wrap:wrap}
   .tab{padding:8px 22px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:.85rem;letter-spacing:1px;cursor:pointer;border-radius:3px;transition:.2s}
   .tab:hover,.tab.active{background:var(--gold);color:var(--dark)}
@@ -61,6 +62,11 @@
   .mode-card h3{color:var(--gold2);margin-bottom:8px;font-size:1rem}
   .mode-card p{font-size:.82rem;color:#c9a84c99;line-height:1.5}
   .mode-card .icon{font-size:2.2rem;margin-bottom:8px}
+  .how-win{max-width:760px;margin:14px auto 6px;border:1px solid #f0d08088;background:linear-gradient(135deg,#2a1200cc,#130802cc);border-radius:8px;padding:14px;text-align:left;box-shadow:0 0 22px #0006}
+  .how-win h2{color:var(--gold2);font-size:.95rem;letter-spacing:.12em;text-align:center;margin-bottom:8px}
+  .how-win ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:6px 18px;list-style:none}
+  .how-win li{font-size:.86rem;color:#f5ecd7;line-height:1.4;position:relative;padding-left:16px}
+  .how-win li::before{content:'+';position:absolute;left:0;color:var(--gold2);font-weight:700}
   .turn-banner{text-align:center;font-size:1.1rem;color:var(--gold2);padding:8px;background:#c9a84c11;border-radius:6px;border:1px solid #c9a84c33;margin-top:10px}
   .round-info{font-size:.8rem;color:#c9a84c99;text-align:center;margin-top:4px}
   .flex-center{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:10px}
@@ -90,22 +96,40 @@
   .virtue-chips{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin-top:6px}
   .virtue-chip{font-size:.66rem;line-height:1;padding:4px 6px;border-radius:999px;color:#fff}
   .example-box{border:1px solid #c9a84c55;background:#1a0e0488;border-radius:8px;padding:10px 12px;margin:10px 0;color:#f5ecd7;line-height:1.55}
+  .hand-tip{font-size:.82rem;color:#f5ecd7;background:#c9a84c14;border:1px solid #c9a84c44;border-radius:6px;padding:8px 10px;margin-bottom:8px}
   .result-summary{text-align:left;display:grid;gap:6px}
   .result-summary strong{color:var(--gold2)}
   .result-total{border-top:1px solid #c9a84c44;margin-top:4px;padding-top:8px;font-size:1.05rem}
   .discussion-prompts{margin-top:10px;border-top:1px solid #c9a84c44;padding-top:10px}
   .discussion-prompts ul{padding-left:18px;margin-top:4px}
+  .quick-start ul{padding-left:18px;margin:4px 0 8px}
+  .quick-start-check{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:10px;color:#e8d5b0}
+  .quick-start-check input{width:18px;height:18px;accent-color:var(--gold)}
   .profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;text-align:left}
   .profile-card{border:1px solid #c9a84c44;background:#120802;border-radius:8px;padding:12px}
   .profile-card h3{color:var(--gold2);font-size:1rem;margin-bottom:4px}
   .print-section{margin:18px 0}
   .print-section h2{color:var(--gold2);text-align:center;margin:16px 0}
   .print-grid-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,180px));gap:16px;justify-content:center}
-  .print-card{min-height:240px;border:2px solid #c9a84c88;border-radius:10px;background:#1e0e04;padding:14px;display:flex;flex-direction:column;justify-content:center;text-align:center;break-inside:avoid}
+  .print-card{min-height:240px;border:2px solid #c9a84c88;border-radius:10px;background:#1e0e04;padding:14px;display:flex;flex-direction:column;justify-content:center;text-align:center;break-inside:avoid;position:relative;overflow:hidden}
+  .print-card::after,.card::after{content:'';position:absolute;inset:6px;border:1px dashed #c9a84c55;border-radius:8px;pointer-events:none}
+  .print-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:9px;background:var(--gold)}
+  .print-card.frame-faith::before{background:var(--faith)}
+  .print-card.frame-mercy::before{background:var(--mercy)}
+  .print-card.frame-wisdom::before{background:var(--wisdom)}
+  .print-card.frame-generosity::before{background:var(--generosity)}
+  .print-card.print-challenge{border-color:#9e3b2f;background:linear-gradient(135deg,#2a0905,#180604)}
+  .print-card.print-challenge::before{background:#9e3b2f}
+  .print-card.print-providence{border-color:#4a7bc8;background:linear-gradient(135deg,#061121,#050a14)}
+  .print-card.print-providence::before{background:#4a7bc8}
+  .print-card.print-token{min-height:160px;border-radius:999px;aspect-ratio:1/1}
+  .print-card.print-token::before{display:none}
+  .print-motif{font-size:2.2rem;color:#f0d08088;margin-bottom:8px;line-height:1}
   .print-card h3{color:var(--gold2);font-size:1rem;margin-bottom:8px}
   .print-card p{color:#e8d5b0;font-size:.82rem;line-height:1.5}
   .print-kind{color:#c9a84c!important;text-transform:uppercase;letter-spacing:.08em;font-size:.68rem!important}
   .print-back{align-items:center;justify-content:center;text-align:center;padding:20px;font-size:1.1rem!important;line-height:1.4;color:var(--gold2)!important}
+  .print-back .back-mark{font-size:2.2rem;color:#f0d08088;line-height:1;margin-bottom:8px}
   .score-sheet{width:100%;border-collapse:collapse;background:#fff;color:#111}
   .score-sheet th,.score-sheet td{border:1px solid #333;padding:6px;height:28px}
   .score-sheet th{background:#eee}
@@ -143,15 +167,17 @@
     #printGrid{display:block!important;padding:0!important}
     .print-section{break-before:page;margin:0 0 18px}
     .print-section:first-child{break-before:auto}
-    .print-grid-inner{display:grid!important;grid-template-columns:repeat(3,2.25in)!important;gap:.16in!important;justify-content:center!important}
-    .card{width:2.25in!important;height:3.35in!important;box-shadow:none!important;break-inside:avoid;page-break-inside:avoid}
+    .print-grid-inner{display:grid!important;grid-template-columns:repeat(3,2.5in)!important;gap:.16in!important;justify-content:center!important}
+    .card{width:2.5in!important;height:3.5in!important;box-shadow:none!important;break-inside:avoid;page-break-inside:avoid}
     .card:hover,.card.selected{transform:none!important}
     .card-body{background:#fff8e8!important}
     .card-name,.card-kp,.card-ability{color:#3b2008!important}
     .card-desc,.card-scripture{color:#3b2008!important}
-    .print-card{background:#fff!important;color:#111!important;min-height:3.35in;box-shadow:none;break-inside:avoid}
+    .print-card{background:#fff!important;color:#111!important;min-height:3.5in;box-shadow:none;break-inside:avoid;border-style:solid!important}
+    .print-card::after,.card::after{border-color:#777!important}
     .print-card h3,.print-card p{color:#111!important}
     .print-back{background:#fff8e8!important;color:#3b2008!important;border-color:#3b2008!important}
+    .print-token-grid .print-card{min-height:1.65in!important}
     body[data-print="cards"] .print-rules,body[data-print="cards"] .print-score{display:none!important}
     body[data-print="rules"] .print-cards,body[data-print="rules"] .print-score{display:none!important}
     body[data-print="score"] .print-cards,body[data-print="score"] .print-rules{display:none!important}
@@ -163,6 +189,7 @@
 <header>
   <h1>✝ Parables &amp; Providence ✝</h1>
   <p>A Christian Strategy Card Game</p>
+  <p class="objective-subtitle">Match parables to challenges. Earn Kingdom Points. Highest score after 7 rounds wins.</p>
 </header>
 <div class="tabs">
   <button class="tab active" onclick="showTab('play',this)">🎮 Play</button>
@@ -176,6 +203,16 @@
       <h2 style="color:var(--gold2);font-size:1.3rem">Choose Your Path</h2>
       <p style="color:#c9a84c99;font-size:.9rem">How many will walk the narrow way?</p>
     </div>
+    <section class="how-win" aria-labelledby="howWinTitle">
+      <h2 id="howWinTitle">HOW TO WIN</h2>
+      <ul>
+        <li>A challenge appears each round.</li>
+        <li>Play one parable card.</li>
+        <li>Match the challenge virtue for bonus points.</li>
+        <li>Use card abilities wisely.</li>
+        <li>Highest Kingdom Points after 7 rounds wins.</li>
+      </ul>
+    </section>
     <div class="mode-select">
       <div class="mode-card" role="button" tabindex="0" onclick="startGame(1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startGame(1)}">
         <div class="icon">⚔️</div><h3>Single Player</h3>
@@ -207,6 +244,7 @@
       <div class="cards-row" id="playedCards"></div>
     </div>
     <div class="zone">
+      <div class="hand-tip"><strong>Tip:</strong> Match the challenge virtue for bonus Kingdom Points.</div>
       <div class="zone-title" id="handLabel">✋ Your Hand</div>
       <div class="cards-row" id="handCards"></div>
     </div>
@@ -228,64 +266,83 @@
 </div>
 
 <div id="instructionsPanel" class="panel instr">
-  <h2>1. What is Parables &amp; Providence?</h2>
-  <p>Parables &amp; Providence is a Christian strategy card game inspired by the parables and teachings of Jesus. Players answer real-life spiritual situations by choosing parable cards, gaining Kingdom Points, and growing in four virtues.</p>
+  <h2>OBJECTIVE</h2>
+  <p>Earn the most Kingdom Points after 7 rounds.</p>
+  <ol>
+    <li>Read the challenge.</li>
+    <li>Play one parable card.</li>
+    <li>Match the virtue for bonus points.</li>
+    <li>Resolve the card ability.</li>
+    <li>Highest score wins.</li>
+  </ol>
   <div class="example-box">This game is designed for reflection and strategy, not for replacing Bible study.</div>
 
-  <h2>2. Goal of the Game</h2>
-  <p>Kingdom Points, or KP, are the main game score. After 7 rounds, the player or group with the highest KP has the strongest final score.</p>
+  <h2>WHAT ARE KINGDOM POINTS?</h2>
+  <p>Kingdom Points (KP) are your score. The player with the most KP wins.</p>
 
-  <h2>3. Game Modes</h2>
-  <ul>
-    <li><strong>Single Player:</strong> Face The Trial across 7 rounds. Easy plays mostly randomly, Medium prefers matching virtues, and Hard chooses strong scoring cards.</li>
-    <li><strong>Multiplayer Pass-and-Play:</strong> Two to four players take private turns on one device. Pass screens hide the next player's hand until they begin.</li>
-    <li><strong>Table Mode:</strong> A group reveals a challenge, discusses three parables, chooses one together, and keeps a shared score.</li>
-  </ul>
-
-  <h2>4. Card Types</h2>
-  <p><strong>Parable Cards</strong> show a name, scripture, virtue, short description, ability, KP value, and art. <strong>Challenge Cards</strong> describe a situation and the virtue it calls for. <strong>Providence Cards</strong> sometimes appear after a challenge and add a small twist for that round.</p>
-
-  <h2>5. Virtues</h2>
-  <p>Faith, Mercy, Wisdom, and Generosity represent the kind of response a player is practicing.</p>
+  <h2>WHAT ARE VIRTUES?</h2>
   <div class="virtue-grid">
-    <div class="virtue-box vb-faith"><h4>Faith</h4><p>Trust, courage, prayer, and obedience when the outcome is not fully seen.</p></div>
-    <div class="virtue-box vb-mercy"><h4>Mercy</h4><p>Compassion, forgiveness, patience, and care for people who might be overlooked.</p></div>
-    <div class="virtue-box vb-wisdom"><h4>Wisdom</h4><p>Discernment, humility, readiness, and the ability to choose what bears good fruit.</p></div>
-    <div class="virtue-box vb-generosity"><h4>Generosity</h4><p>Open hands, shared blessing, welcome, stewardship, and room at the table.</p></div>
+    <div class="virtue-box vb-faith"><h4>Faith</h4><p>Trust God.</p></div>
+    <div class="virtue-box vb-mercy"><h4>Mercy</h4><p>Help others.</p></div>
+    <div class="virtue-box vb-wisdom"><h4>Wisdom</h4><p>Make good decisions.</p></div>
+    <div class="virtue-box vb-generosity"><h4>Generosity</h4><p>Share blessings.</p></div>
   </div>
 
-  <h2>6. How a Round Works</h2>
-  <ol>
-    <li>A challenge appears.</li>
-    <li>The active player chooses a parable card.</li>
-    <li>Matching the challenge virtue gives a +2 KP bonus.</li>
-    <li>The card ability resolves.</li>
-    <li>Kingdom Points and virtue growth are awarded.</li>
-    <li>Play continues to the next player or next round.</li>
-  </ol>
-  <div class="example-box"><strong>Example:</strong> A Mercy challenge appears. You play The Good Samaritan for 4 KP, gain +2 KP for matching Mercy, and gain +1 KP from the card ability. Total: 7 KP. Mercy grows by 2.</div>
+  <h2>EXAMPLE ROUND</h2>
+  <div class="example-box">
+    <p><strong>Challenge:</strong> A stranger is in need.</p>
+    <p><strong>Challenge Virtue:</strong> Mercy</p>
+    <p><strong>You play:</strong> The Good Samaritan</p>
+    <p><strong>Base Score:</strong> +4 KP</p>
+    <p><strong>Virtue Match:</strong> +2 KP</p>
+    <p><strong>Total:</strong> 6 KP</p>
+  </div>
 
-  <h2>7. Single Player</h2>
-  <p>In Single Player you face The Trial for 7 rounds. The Trial uses the selected difficulty and cannot see your choices. If The Trial runs low on cards, it draws safely when possible or passes without stalling the game.</p>
-
-  <h2>8. Multiplayer Pass-and-Play</h2>
-  <p>In 2-4 player games, pass the device after each turn. The next player's hand stays hidden until they press the begin-turn button. The scoreboard remains visible so everyone can follow KP and virtue growth.</p>
-
-  <h2>9. Table Mode</h2>
-  <p>Table Mode is for small groups, families, and church gatherings. Each round shows one challenge and three parable choices. The group discusses which parable best speaks to the situation, chooses one, reads the result, and uses the prompts for reflection.</p>
-
-  <h2>10. Scoring</h2>
-  <p>Each played card adds its printed KP. A matching challenge virtue adds +2 KP. Abilities and Providence cards may add smaller bonuses, draw cards, recover KP, or help the lowest-scoring player. Virtue growth is tracked separately: +1 for the card's virtue, plus +1 more if it matched the challenge.</p>
-
-  <h2>11. Printing the Deck</h2>
-  <p>The Print Deck tab includes parable cards, challenge cards, Providence cards, card backs, a one-page rules sheet, and a score sheet. Use the print buttons to print only the section you need.</p>
-
-  <h2>12. Strategy Tips</h2>
+  <h2>Game Modes</h2>
   <ul>
-    <li>Matching the challenge is reliable, but a strong ability can be worth choosing off-virtue.</li>
-    <li>Watch the lowest-scoring player. Several Mercy and Generosity effects can shift the table.</li>
-    <li>Do not ignore virtue growth. Your final Disciple Profile depends on what you practiced most.</li>
-    <li>In Table Mode, choose the parable that best fits the situation, not just the highest KP card.</li>
+    <li><strong>Single Player:</strong> Face The Trial. Easy is loose, Medium favors matching virtues, and Hard scores aggressively.</li>
+    <li><strong>Multiplayer:</strong> Pass the device. Hands stay hidden until the next player begins.</li>
+    <li><strong>Table Mode:</strong> Groups discuss three parables and choose one together.</li>
+  </ul>
+
+  <h2>Card Abilities</h2>
+  <ul>
+    <li>Abilities add small strategic effects: gain KP, draw, recover, prepare next round, or help the lowest-scoring player.</li>
+    <li>The result panel shows exactly what happened after each card.</li>
+  </ul>
+
+  <h2>Providence Cards</h2>
+  <ul>
+    <li>After a challenge appears, Providence has a 25% chance to add a round twist.</li>
+    <li>If no Providence card appears, the round plays normally.</li>
+  </ul>
+
+  <h2>Table Mode</h2>
+  <ul>
+    <li>Reveal a challenge.</li>
+    <li>Discuss three parable cards.</li>
+    <li>Choose the card that best speaks to the situation.</li>
+    <li>Use the discussion prompts after scoring.</li>
+  </ul>
+
+  <h2>Multiplayer</h2>
+  <ul>
+    <li>Round and player position are shown each turn.</li>
+    <li>Use the pass screen to protect each player's hand.</li>
+  </ul>
+
+  <h2>Printing the Deck</h2>
+  <ul>
+    <li>Print parable, challenge, Providence, card backs, quick-start cards, tokens, rules, and score sheets.</li>
+    <li>Print mode uses white backgrounds, dark text, virtue stripes, and cut guides.</li>
+  </ul>
+
+  <h2>Strategy Tips</h2>
+  <ul>
+    <li>Match the challenge virtue when you can.</li>
+    <li>Sometimes a useful ability is worth more than a match.</li>
+    <li>Watch the lowest score. Some cards can change the table quickly.</li>
+    <li>Your Disciple Profile reflects your strongest virtue.</li>
   </ul>
 </div>
 
@@ -393,6 +450,7 @@ var PROVIDENCE=[
 ];
 
 // Improved game flow, scoring, accessibility, Table Mode, and print views.
+var G={};
 function virtueLabel(v){return{faith:'Faith',mercy:'Mercy',wisdom:'Wisdom',generosity:'Generosity'}[v]||v;}
 function virtueIcon(v){return{faith:'F',mercy:'M',wisdom:'W',generosity:'G'}[v]||'';}
 function emptyVirtues(){return{faith:0,mercy:0,wisdom:0,generosity:0};}
@@ -442,7 +500,27 @@ function drawProvidence(){
   if(!G.providence.length) G.providence=shuffle(PROVIDENCE.slice());
   return G.providence.pop();
 }
-function startGame(numPlayers){
+function shouldShowQuickStart(){
+  try{return localStorage.getItem('ppQuickStartHidden')!=='1';}
+  catch(e){return !G.quickStartSeen;}
+}
+function rememberQuickStartChoice(){
+  var cb=document.getElementById('quickStartDontShow');
+  if(cb&&cb.checked){try{localStorage.setItem('ppQuickStartHidden','1');}catch(e){}}
+  G.quickStartSeen=true;
+}
+function showQuickStart(next){
+  var body='<div class="result-summary quick-start">'
+    +'<p><strong>Goal:</strong> Earn the most Kingdom Points.</p>'
+    +'<p><strong>Each round:</strong></p>'
+    +'<ul><li>Read the challenge.</li><li>Choose a parable card.</li><li>Match the virtue for bonus points.</li><li>Use card abilities for extra strategy.</li></ul>'
+    +'<p><strong>Highest score after 7 rounds wins.</strong></p>'
+    +'<label class="quick-start-check"><input type="checkbox" id="quickStartDontShow"> Don&#39;t show again</label>'
+    +'</div>';
+  showModal('HOW TO PLAY',body,[{label:'Start Playing',fn:function(){rememberQuickStartChoice();hideModal();next();}}]);
+}
+function startGame(numPlayers,skipQuickStart){
+  if(!skipQuickStart&&shouldShowQuickStart()){showQuickStart(function(){startGame(numPlayers,true);});return;}
   var diff=document.getElementById('difficulty')?document.getElementById('difficulty').value:'medium';
   var single=numPlayers===1;
   var names=single?['You','The Trial']:['Player 1','Player 2','Player 3','Player 4'].slice(0,numPlayers);
@@ -455,7 +533,8 @@ function startGame(numPlayers){
   renderBoard();
   log('The journey begins. May wisdom guide your hand.','info');
 }
-function startTableMode(){
+function startTableMode(skipQuickStart){
+  if(!skipQuickStart&&shouldShowQuickStart()){showQuickStart(function(){startTableMode(true);});return;}
   G={mode:'table',requestedPlayers:1,numPlayers:1,players:[newPlayer('Table Group',false)],deck:shuffle(CARDS.slice()),discard:[],challenges:shuffle(CHALLENGES.slice()),providence:shuffle(PROVIDENCE.slice()),round:1,maxRounds:7,currentChallenge:null,currentProvidence:null,activePlayer:0,pendingPlays:[],diff:'medium',nextCardBonus:{},nextMatchBonus:{},nextFreePass:{},freePassThisRound:{},roundPassCost:1,hardPassThisRound:false,tableChoices:[]};
   document.getElementById('modeSelect').classList.add('hidden');
   document.getElementById('gameBoard').classList.remove('hidden');
@@ -834,9 +913,10 @@ function showTab(id,btn){
   if(btn) btn.classList.add('active');
   if(id==='print') buildPrintGrid();
 }
-function renderPrintCard(title,body,kind,virtue){
-  var d=document.createElement('div');d.className='print-card '+(virtue?'frame-'+virtue:'');
-  d.innerHTML='<h3>'+escapeHtml(title)+'</h3><p class="print-kind">'+escapeHtml(kind)+'</p><p>'+escapeHtml(body)+'</p>';
+function renderPrintCard(title,body,kind,virtue,motif){
+  var kindClass='print-'+String(kind||'card').toLowerCase().replace(/[^a-z0-9]+/g,'-');
+  var d=document.createElement('div');d.className='print-card '+kindClass+' '+(virtue?'frame-'+virtue:'');
+  d.innerHTML='<div class="print-motif">'+escapeHtml(motif||'✦')+'</div><h3>'+escapeHtml(title)+'</h3><p class="print-kind">'+escapeHtml(kind)+'</p><p>'+escapeHtml(body)+'</p>';
   return d;
 }
 function buildPrintGrid(){
@@ -845,14 +925,22 @@ function buildPrintGrid(){
   var cards=document.createElement('section');cards.className='print-section print-cards';cards.innerHTML='<h2>Parable Cards</h2><div class="print-grid-inner"></div>';
   var cg=cards.querySelector('.print-grid-inner');CARDS.forEach(function(card){cg.appendChild(renderCard(card,{}));});
   var challenges=document.createElement('section');challenges.className='print-section print-cards';challenges.innerHTML='<h2>Challenge Cards</h2><div class="print-grid-inner"></div>';
-  var chg=challenges.querySelector('.print-grid-inner');CHALLENGES.forEach(function(ch){chg.appendChild(renderPrintCard(virtueLabel(ch.virtue)+' Challenge',ch.text+' '+ch.bonus,'Challenge',ch.virtue));});
+  var chg=challenges.querySelector('.print-grid-inner');CHALLENGES.forEach(function(ch){chg.appendChild(renderPrintCard(virtueLabel(ch.virtue)+' Challenge',ch.text+' '+ch.bonus,'Challenge',ch.virtue,'●'));});
   var prov=document.createElement('section');prov.className='print-section print-cards';prov.innerHTML='<h2>Providence Cards</h2><div class="print-grid-inner"></div>';
-  var pg=prov.querySelector('.print-grid-inner');PROVIDENCE.forEach(function(pr){pg.appendChild(renderPrintCard(pr.name,pr.text,'Providence',''));});
+  var pg=prov.querySelector('.print-grid-inner');PROVIDENCE.forEach(function(pr){pg.appendChild(renderPrintCard(pr.name,pr.text,'Providence','','✦'));});
   var backs=document.createElement('section');backs.className='print-section print-cards';backs.innerHTML='<h2>Card Backs</h2><div class="print-grid-inner"></div>';
-  var bg=backs.querySelector('.print-grid-inner');for(var i=0;i<8;i++){var back=document.createElement('div');back.className='card face-down print-back';back.textContent='Parables & Providence';bg.appendChild(back);}
-  var rules=document.createElement('section');rules.className='print-section print-rules';rules.innerHTML='<h2>One-Page Rules</h2><p>Reveal a challenge. Choose a parable card. Gain base KP, +2 KP for matching the challenge virtue, resolve the card ability, then mark virtue growth. Play 7 rounds. Highest KP wins. In Table Mode, discuss three revealed parables and choose one together.</p><p>Kingdom Points are the main score. Virtues track the kind of response practiced: Faith, Mercy, Wisdom, and Generosity.</p>';
-  var score=document.createElement('section');score.className='print-section print-score';score.innerHTML='<h2>Score Sheet</h2><table class="score-sheet"><tr><th>Round</th><th>Player</th><th>KP</th><th>Faith</th><th>Mercy</th><th>Wisdom</th><th>Generosity</th></tr>'+Array(28).fill(0).map(function(_,i){return'<tr><td>'+(Math.floor(i/4)+1)+'</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';}).join('')+'</table>';
-  grid.appendChild(cards);grid.appendChild(challenges);grid.appendChild(prov);grid.appendChild(backs);grid.appendChild(rules);grid.appendChild(score);
+  var bg=backs.querySelector('.print-grid-inner');for(var i=0;i<8;i++){var back=document.createElement('div');back.className='card face-down print-back';back.innerHTML='<div class="back-mark">✝<br>✦</div><div>Parables &amp; Providence</div><small>Match parables to challenges</small>';bg.appendChild(back);}
+  var quick=document.createElement('section');quick.className='print-section print-cards';quick.innerHTML='<h2>Quick-Start Cards</h2><div class="print-grid-inner"></div>';
+  var qg=quick.querySelector('.print-grid-inner');
+  qg.appendChild(renderPrintCard('OBJECTIVE','Earn the most Kingdom Points.','Quick Start','','✝'));
+  qg.appendChild(renderPrintCard('TURN ORDER','Reveal Challenge. Play Card. Match Virtue. Gain KP. Highest Score Wins.','Quick Start','','✦'));
+  var tokens=document.createElement('section');tokens.className='print-section print-cards';tokens.innerHTML='<h2>Markers & Trackers</h2><div class="print-grid-inner print-token-grid"></div>';
+  var tg=tokens.querySelector('.print-grid-inner');
+  tg.appendChild(renderPrintCard('First Player','Give this marker to the first player each game.','Token','','1'));
+  tg.appendChild(renderPrintCard('Round Tracker','Move this marker from 1 to 7 as rounds are completed.','Token','','7'));
+  var rules=document.createElement('section');rules.className='print-section print-rules';rules.innerHTML='<h2>One-Page Rules</h2><p><strong>Objective:</strong> Earn the most Kingdom Points after 7 rounds.</p><p>Each round: reveal a challenge, play one parable card, gain base KP, add +2 KP for matching the challenge virtue, resolve the ability, and mark virtue growth. In Table Mode, discuss three revealed parables and choose one together.</p><p><strong>Virtues:</strong> Faith, Mercy, Wisdom, and Generosity.</p>';
+  var score=document.createElement('section');score.className='print-section print-score';score.innerHTML='<h2>Score Sheet</h2><table class="score-sheet"><tr><th>Player</th><th>Faith</th><th>Mercy</th><th>Wisdom</th><th>Generosity</th><th>KP</th></tr>'+Array(20).fill(0).map(function(){return'<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>';}).join('')+'</table>';
+  grid.appendChild(cards);grid.appendChild(challenges);grid.appendChild(prov);grid.appendChild(backs);grid.appendChild(quick);grid.appendChild(tokens);grid.appendChild(rules);grid.appendChild(score);
 }
 function printSection(mode){
   buildPrintGrid();
