@@ -80,8 +80,82 @@
   .modal-overlay{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
   .modal{background:linear-gradient(135deg,#1a0a00,#2e1200);border:2px solid var(--gold);border-radius:12px;padding:28px;max-width:440px;width:100%;text-align:center}
   .modal h2{color:var(--gold2);font-size:1.4rem;margin-bottom:12px}
-  .modal p{color:#e8d5b0;line-height:1.6;margin-bottom:16px}
+  .modal p,.modal li,.modal div{color:#e8d5b0;line-height:1.6}
   .modal .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  button:focus-visible,.card:focus-visible,.mode-card:focus-visible,.tab:focus-visible{outline:3px solid var(--gold2);outline-offset:3px}
+  .providence-card{margin:12px auto 0;max-width:680px;border:1px solid #f0d08088;background:#2a180acc;border-radius:8px;padding:10px 12px;text-align:left}
+  .providence-card strong{display:block;color:var(--gold2);font-size:.86rem;margin-bottom:2px}
+  .providence-card span{color:#e8d5b0;font-size:.82rem;line-height:1.45}
+  .kp-label{font-size:.68rem;color:#c9a84c77;text-transform:uppercase;letter-spacing:.08em}
+  .virtue-chips{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .virtue-chip{font-size:.66rem;line-height:1;padding:4px 6px;border-radius:999px;color:#fff}
+  .example-box{border:1px solid #c9a84c55;background:#1a0e0488;border-radius:8px;padding:10px 12px;margin:10px 0;color:#f5ecd7;line-height:1.55}
+  .result-summary{text-align:left;display:grid;gap:6px}
+  .result-summary strong{color:var(--gold2)}
+  .result-total{border-top:1px solid #c9a84c44;margin-top:4px;padding-top:8px;font-size:1.05rem}
+  .discussion-prompts{margin-top:10px;border-top:1px solid #c9a84c44;padding-top:10px}
+  .discussion-prompts ul{padding-left:18px;margin-top:4px}
+  .profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;text-align:left}
+  .profile-card{border:1px solid #c9a84c44;background:#120802;border-radius:8px;padding:12px}
+  .profile-card h3{color:var(--gold2);font-size:1rem;margin-bottom:4px}
+  .print-section{margin:18px 0}
+  .print-section h2{color:var(--gold2);text-align:center;margin:16px 0}
+  .print-grid-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,180px));gap:16px;justify-content:center}
+  .print-card{min-height:240px;border:2px solid #c9a84c88;border-radius:10px;background:#1e0e04;padding:14px;display:flex;flex-direction:column;justify-content:center;text-align:center;break-inside:avoid}
+  .print-card h3{color:var(--gold2);font-size:1rem;margin-bottom:8px}
+  .print-card p{color:#e8d5b0;font-size:.82rem;line-height:1.5}
+  .print-kind{color:#c9a84c!important;text-transform:uppercase;letter-spacing:.08em;font-size:.68rem!important}
+  .print-back{align-items:center;justify-content:center;text-align:center;padding:20px;font-size:1.1rem!important;line-height:1.4;color:var(--gold2)!important}
+  .score-sheet{width:100%;border-collapse:collapse;background:#fff;color:#111}
+  .score-sheet th,.score-sheet td{border:1px solid #333;padding:6px;height:28px}
+  .score-sheet th{background:#eee}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}.card:hover,.mode-card:hover{transform:none!important}}
+  @media (max-width:700px){
+    header{padding:14px 8px 8px}
+    header h1{letter-spacing:0;font-size:1.7rem}
+    .panel{padding:8px 10px 96px;max-width:100%}
+    .tabs{gap:4px;padding:10px 6px}
+    .tab{padding:10px 12px;min-height:44px}
+    .mode-select{gap:10px;padding:12px 0}
+    .mode-card{width:100%;max-width:360px;min-height:128px}
+    .scoreboard{justify-content:flex-start;padding:8px;gap:8px}
+    .score-block{min-width:135px;flex:1}
+    .challenge-area{padding:12px 10px}
+    .cards-row{gap:8px}
+    #handCards{flex-wrap:nowrap;overflow-x:auto;align-items:stretch;padding:8px 2px 12px;scroll-snap-type:x proximity}
+    #handCards .card{width:145px;height:226px;scroll-snap-align:start}
+    #handCards .card-art{height:82px}
+    #handCards .card-name{font-size:.66rem}
+    #handCards .card-desc{font-size:.54rem;line-height:1.25}
+    #handCards .card-ability{font-size:.52rem}
+    .card.selected{transform:translateY(-6px) scale(1.02)}
+    .flex-center{position:sticky;bottom:0;z-index:20;background:#0d0802ee;border-top:1px solid #c9a84c44;padding:10px 6px;margin-left:-10px;margin-right:-10px}
+    .btn{min-height:44px;padding:10px 14px}
+    .modal-overlay{align-items:flex-start;overflow:auto}
+    .modal{max-height:92vh;overflow:auto;padding:20px 16px;margin-top:18px}
+    .print-grid{padding:8px 0}
+  }
+  @media print{
+    @page{margin:.45in}
+    body{background:#fff!important;color:#111!important}
+    body::before,body::after,header,.tabs,.no-print,#playPanel,#instructionsPanel{display:none!important}
+    #printPanel{display:block!important;max-width:none!important;padding:0!important}
+    #printGrid{display:block!important;padding:0!important}
+    .print-section{break-before:page;margin:0 0 18px}
+    .print-section:first-child{break-before:auto}
+    .print-grid-inner{display:grid!important;grid-template-columns:repeat(3,2.25in)!important;gap:.16in!important;justify-content:center!important}
+    .card{width:2.25in!important;height:3.35in!important;box-shadow:none!important;break-inside:avoid;page-break-inside:avoid}
+    .card:hover,.card.selected{transform:none!important}
+    .card-body{background:#fff8e8!important}
+    .card-name,.card-kp,.card-ability{color:#3b2008!important}
+    .card-desc,.card-scripture{color:#3b2008!important}
+    .print-card{background:#fff!important;color:#111!important;min-height:3.35in;box-shadow:none;break-inside:avoid}
+    .print-card h3,.print-card p{color:#111!important}
+    .print-back{background:#fff8e8!important;color:#3b2008!important;border-color:#3b2008!important}
+    body[data-print="cards"] .print-rules,body[data-print="cards"] .print-score{display:none!important}
+    body[data-print="rules"] .print-cards,body[data-print="rules"] .print-score{display:none!important}
+    body[data-print="score"] .print-cards,body[data-print="score"] .print-rules{display:none!important}
+  }
   .hidden{display:none!important}
 </style>
 </head>
@@ -103,17 +177,18 @@
       <p style="color:#c9a84c99;font-size:.9rem">How many will walk the narrow way?</p>
     </div>
     <div class="mode-select">
-      <div class="mode-card" onclick="startGame(1)">
+      <div class="mode-card" role="button" tabindex="0" onclick="startGame(1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startGame(1)}">
         <div class="icon">⚔️</div><h3>Single Player</h3>
-        <p>Face the Adversary AI across 7 rounds. Reach 21 Kingdom Points to win.</p>
+        <p>Face The Trial across 7 rounds. Build Kingdom Points while practicing the virtues.</p>
         <p style="margin-top:8px;color:var(--gold);font-size:.78rem">Difficulty:</p>
         <select id="difficulty" onclick="event.stopPropagation()" style="background:#2a1000;color:var(--gold);border:1px solid #c9a84c44;padding:4px 8px;border-radius:4px;margin-top:4px;font-size:.85rem">
           <option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option>
         </select>
       </div>
-      <div class="mode-card" onclick="startGame(2)"><div class="icon">👥</div><h3>2 Players</h3><p>Pass &amp; play with a friend. Take turns building Kingdom Points.</p></div>
-      <div class="mode-card" onclick="startGame(3)"><div class="icon">👨‍👩‍👧</div><h3>3 Players</h3><p>A three-way battle of biblical wisdom and strategy.</p></div>
-      <div class="mode-card" onclick="startGame(4)"><div class="icon">👨‍👩‍👧‍👦</div><h3>4 Players</h3><p>The full Kingdom Builder experience for four.</p></div>
+      <div class="mode-card" role="button" tabindex="0" onclick="startGame(2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startGame(2)}"><div class="icon">👥</div><h3>2 Players</h3><p>Pass &amp; play with a friend. Take turns building Kingdom Points.</p></div>
+      <div class="mode-card" role="button" tabindex="0" onclick="startGame(3)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startGame(3)}"><div class="icon">👨‍👩‍👧</div><h3>3 Players</h3><p>A three-way battle of biblical wisdom and strategy.</p></div>
+      <div class="mode-card" role="button" tabindex="0" onclick="startGame(4)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startGame(4)}"><div class="icon">👨‍👩‍👧‍👦</div><h3>4 Players</h3><p>The full Kingdom Builder experience for four.</p></div>
+      <div class="mode-card" role="button" tabindex="0" onclick="startTableMode()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();startTableMode()}"><div class="icon">✦</div><h3>Table Mode</h3><p>For small groups, families, and church gatherings. Discuss, choose, and keep score together.</p></div>
     </div>
   </div>
 
@@ -125,6 +200,7 @@
       <div class="challenge-title">⚡ Challenge of the Round</div>
       <div class="challenge-text" id="challengeText">—</div>
       <div class="challenge-virtue" id="challengeVirtue"></div>
+      <div class="providence-card hidden" id="providenceArea"></div>
     </div>
     <div class="zone">
       <div class="zone-title">⬆ Cards Played This Round</div>
@@ -142,50 +218,86 @@
     <div class="msg-log" id="msgLog"></div>
   </div>
 
-  <div class="modal-overlay hidden" id="modal">
+  <div class="modal-overlay hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
       <h2 id="modalTitle"></h2>
-      <p id="modalBody"></p>
+      <div id="modalBody"></div>
       <div class="btns" id="modalBtns"></div>
     </div>
   </div>
 </div>
 
 <div id="instructionsPanel" class="panel instr">
-  <h2>📜 About Parables &amp; Providence</h2>
-  <p>A Christian strategy card game where players wield the teachings of Jesus to overcome challenges and build God's Kingdom. Each card represents one of the parables of Christ, carrying a virtue, a special ability, and Kingdom Points.</p>
-  <h2>🎯 Objective</h2>
-  <p><strong>Single Player:</strong> Earn 21 Kingdom Points before the Adversary across 7 rounds.</p>
-  <p><strong>Multiplayer (2–4):</strong> Most Kingdom Points after 7 rounds wins.</p>
-  <h2>🃏 The Cards</h2>
-  <p>12 parable cards. Each player draws 5 cards at the start. Each card shows: Parable Name &amp; Scripture, Virtue (Faith/Mercy/Wisdom/Generosity), Story Summary, Special Ability, and Kingdom Points (KP).</p>
-  <h2>⚡ Challenges</h2>
-  <p>Each round a Challenge card is revealed. Playing a card whose Virtue <em>matches</em> earns a <strong>+2 KP bonus</strong>.</p>
-  <h2>🔄 How to Play</h2>
-  <ol>
-    <li>A Challenge card is revealed for the round.</li>
-    <li>The active player selects and plays a card from their hand.</li>
-    <li>In multiplayer, players take turns. In single player, the AI plays after you.</li>
-    <li>KP are awarded based on card value + virtue match bonuses + special abilities.</li>
-    <li>After 7 rounds, the player with the most KP wins.</li>
-    <li>You may <strong>Pass</strong> instead of playing — but lose 1 KP.</li>
-  </ol>
-  <h2>✨ The Four Virtues</h2>
+  <h2>1. What is Parables &amp; Providence?</h2>
+  <p>Parables &amp; Providence is a Christian strategy card game inspired by the parables and teachings of Jesus. Players answer real-life spiritual situations by choosing parable cards, gaining Kingdom Points, and growing in four virtues.</p>
+  <div class="example-box">This game is designed for reflection and strategy, not for replacing Bible study.</div>
+
+  <h2>2. Goal of the Game</h2>
+  <p>Kingdom Points, or KP, are the main game score. After 7 rounds, the player or group with the highest KP has the strongest final score.</p>
+
+  <h2>3. Game Modes</h2>
+  <ul>
+    <li><strong>Single Player:</strong> Face The Trial across 7 rounds. Easy plays mostly randomly, Medium prefers matching virtues, and Hard chooses strong scoring cards.</li>
+    <li><strong>Multiplayer Pass-and-Play:</strong> Two to four players take private turns on one device. Pass screens hide the next player's hand until they begin.</li>
+    <li><strong>Table Mode:</strong> A group reveals a challenge, discusses three parables, chooses one together, and keeps a shared score.</li>
+  </ul>
+
+  <h2>4. Card Types</h2>
+  <p><strong>Parable Cards</strong> show a name, scripture, virtue, short description, ability, KP value, and art. <strong>Challenge Cards</strong> describe a situation and the virtue it calls for. <strong>Providence Cards</strong> sometimes appear after a challenge and add a small twist for that round.</p>
+
+  <h2>5. Virtues</h2>
+  <p>Faith, Mercy, Wisdom, and Generosity represent the kind of response a player is practicing.</p>
   <div class="virtue-grid">
-    <div class="virtue-box vb-faith"><h4>⬡ Faith</h4><p>Bold trust in God. High KP and powerful effects.</p></div>
-    <div class="virtue-box vb-mercy"><h4>❤ Mercy</h4><p>Forgiveness and compassion. Can heal lost KP.</p></div>
-    <div class="virtue-box vb-wisdom"><h4>◆ Wisdom</h4><p>Strategic advantages — drawing cards, seeing ahead.</p></div>
-    <div class="virtue-box vb-generosity"><h4>✦ Generosity</h4><p>Multiplies blessings when shared.</p></div>
+    <div class="virtue-box vb-faith"><h4>Faith</h4><p>Trust, courage, prayer, and obedience when the outcome is not fully seen.</p></div>
+    <div class="virtue-box vb-mercy"><h4>Mercy</h4><p>Compassion, forgiveness, patience, and care for people who might be overlooked.</p></div>
+    <div class="virtue-box vb-wisdom"><h4>Wisdom</h4><p>Discernment, humility, readiness, and the ability to choose what bears good fruit.</p></div>
+    <div class="virtue-box vb-generosity"><h4>Generosity</h4><p>Open hands, shared blessing, welcome, stewardship, and room at the table.</p></div>
   </div>
-  <h2>🤖 AI Difficulty</h2>
-  <ul><li><strong>Easy:</strong> Plays randomly.</li><li><strong>Medium:</strong> Tries to match the challenge virtue.</li><li><strong>Hard:</strong> Always optimizes for maximum KP.</li></ul>
+
+  <h2>6. How a Round Works</h2>
+  <ol>
+    <li>A challenge appears.</li>
+    <li>The active player chooses a parable card.</li>
+    <li>Matching the challenge virtue gives a +2 KP bonus.</li>
+    <li>The card ability resolves.</li>
+    <li>Kingdom Points and virtue growth are awarded.</li>
+    <li>Play continues to the next player or next round.</li>
+  </ol>
+  <div class="example-box"><strong>Example:</strong> A Mercy challenge appears. You play The Good Samaritan for 4 KP, gain +2 KP for matching Mercy, and gain +1 KP from the card ability. Total: 7 KP. Mercy grows by 2.</div>
+
+  <h2>7. Single Player</h2>
+  <p>In Single Player you face The Trial for 7 rounds. The Trial uses the selected difficulty and cannot see your choices. If The Trial runs low on cards, it draws safely when possible or passes without stalling the game.</p>
+
+  <h2>8. Multiplayer Pass-and-Play</h2>
+  <p>In 2-4 player games, pass the device after each turn. The next player's hand stays hidden until they press the begin-turn button. The scoreboard remains visible so everyone can follow KP and virtue growth.</p>
+
+  <h2>9. Table Mode</h2>
+  <p>Table Mode is for small groups, families, and church gatherings. Each round shows one challenge and three parable choices. The group discusses which parable best speaks to the situation, chooses one, reads the result, and uses the prompts for reflection.</p>
+
+  <h2>10. Scoring</h2>
+  <p>Each played card adds its printed KP. A matching challenge virtue adds +2 KP. Abilities and Providence cards may add smaller bonuses, draw cards, recover KP, or help the lowest-scoring player. Virtue growth is tracked separately: +1 for the card's virtue, plus +1 more if it matched the challenge.</p>
+
+  <h2>11. Printing the Deck</h2>
+  <p>The Print Deck tab includes parable cards, challenge cards, Providence cards, card backs, a one-page rules sheet, and a score sheet. Use the print buttons to print only the section you need.</p>
+
+  <h2>12. Strategy Tips</h2>
+  <ul>
+    <li>Matching the challenge is reliable, but a strong ability can be worth choosing off-virtue.</li>
+    <li>Watch the lowest-scoring player. Several Mercy and Generosity effects can shift the table.</li>
+    <li>Do not ignore virtue growth. Your final Disciple Profile depends on what you practiced most.</li>
+    <li>In Table Mode, choose the parable that best fits the situation, not just the highest KP card.</li>
+  </ul>
 </div>
 
 <div id="printPanel" class="panel">
   <div class="no-print flex-center" style="margin-bottom:16px;flex-direction:column;gap:8px">
-    <h2 style="color:var(--gold2);text-align:center">🖨️ Print Your Deck</h2>
-    <p style="color:#c9a84c99;text-align:center;font-size:.9rem">All 12 parable cards ready to print, cut, and play.</p>
-    <button class="btn btn-primary" onclick="window.print()">Print Deck Now</button>
+    <h2 style="color:var(--gold2);text-align:center">Print Your Deck</h2>
+    <p style="color:#c9a84c99;text-align:center;font-size:.9rem">Parable cards, challenge cards, Providence cards, card backs, rules, and score sheets.</p>
+    <div class="flex-center">
+      <button class="btn btn-primary" onclick="printSection('cards')">Print Cards</button>
+      <button class="btn" onclick="printSection('rules')">Print Rules</button>
+      <button class="btn" onclick="printSection('score')">Print Score Sheet</button>
+    </div>
   </div>
   <div class="print-grid" id="printGrid"></div>
 </div>
@@ -204,47 +316,193 @@ function artRichFool(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.or
 function artPharisee(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg10" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#100a00"/><stop offset="100%" stop-color="#402000"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg10)"/><path d="M0 85 L180 85 L180 105 L0 105Z" fill="#200a00"/><path d="M50 55 L55 85 L45 85Z" fill="#c9a84c" opacity=".6"/><circle cx="52" cy="50" r="9" fill="#c9a84c" opacity=".7"/><rect x="44" y="30" width="16" height="6" fill="#f0d080" opacity=".5" rx="2"/><path d="M120 50 L125 85 L115 85Z" fill="#f0d080"/><circle cx="122" cy="45" r="9" fill="#f0d080"/><path d="M116 40 L118 30 L120 28 L122 30 L124 40" fill="none" stroke="#c9a84c" stroke-width="1.2"/><text x="90" y="102" text-anchor="middle" fill="#f0a870" font-size="7" font-family="serif" opacity=".8">The Humble Exalted</text></svg>';}
 function artUnforgiving(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg11" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0a0a1a"/><stop offset="100%" stop-color="#202050"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg11)"/><path d="M0 80 L180 80 L180 105 L0 105Z" fill="#10103a"/><path d="M60 50 L65 80 L55 80Z" fill="#c9a84c"/><circle cx="62" cy="45" r="9" fill="#f0d080"/><path d="M108 55 L113 80 L103 80Z" fill="#8080c0"/><circle cx="110" cy="50" r="8" fill="#a0a0e0"/><path d="M75 58 L95 62" stroke="#c84a6a" stroke-width="2" stroke-dasharray="3,3"/><path d="M90 55 L87 62 L93 62Z" fill="#c84a6a"/><text x="90" y="102" text-anchor="middle" fill="#8080f0" font-size="7" font-family="serif" opacity=".8">Forgive as Forgiven</text></svg>';}
 function artWedding(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg12" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0a15"/><stop offset="100%" stop-color="#50103a"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg12)"/><path d="M0 80 Q90 65 180 75 L180 105 L0 105Z" fill="#2a0520"/><path d="M70 20 L90 5 L110 20 L110 45 L70 45Z" fill="#3a0a28"/><path d="M75 45 L85 45 L85 30 L75 30Z" fill="#5a1540"/><path d="M95 45 L105 45 L105 30 L95 30Z" fill="#5a1540"/><rect x="78" y="18" width="24" height="2" fill="#f0d080" opacity=".6"/><ellipse cx="30" cy="72" rx="8" ry="10" fill="#f0d080" opacity=".7"/><circle cx="30" cy="60" r="6" fill="#f0c0a0"/><ellipse cx="58" cy="72" rx="8" ry="10" fill="#f0d080" opacity=".7"/><circle cx="58" cy="60" r="6" fill="#f0c0a0"/><ellipse cx="122" cy="72" rx="8" ry="10" fill="#f0d080" opacity=".7"/><circle cx="122" cy="60" r="6" fill="#f0c0a0"/><ellipse cx="150" cy="72" rx="8" ry="10" fill="#f0d080" opacity=".7"/><circle cx="150" cy="60" r="6" fill="#f0c0a0"/><text x="90" y="102" text-anchor="middle" fill="#f07ab0" font-size="7" font-family="serif" opacity=".8">All Are Invited</text></svg>';}
+function artTeaching(bg1,bg2,ground,symbol,caption){var gid='teach'+caption.replace(/[^a-zA-Z0-9]/g,'');return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="'+gid+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="'+bg1+'"/><stop offset="100%" stop-color="'+bg2+'"/></linearGradient></defs><rect width="180" height="105" fill="url(#'+gid+')"/><path d="M0 82 Q45 66 90 74 Q135 82 180 66 L180 105 L0 105Z" fill="'+ground+'" opacity=".9"/><circle cx="142" cy="20" r="13" fill="#f0d080" opacity=".55"/><text x="90" y="57" text-anchor="middle" fill="#f0d080" font-size="36" font-family="Georgia,serif" font-weight="bold">'+symbol+'</text><path d="M48 72 Q90 58 132 72" stroke="#c9a84c" stroke-width="2" fill="none" opacity=".75"/><text x="90" y="102" text-anchor="middle" fill="#f0d080" font-size="7" font-family="serif" opacity=".85">'+caption+'</text></svg>';}
+function artBuilders(){return artTeaching('#160b02','#553015','#2a1608','H','Built on Rock');}
+function artWidow(){return artTeaching('#120915','#502040','#2a1020','P','Persistent Prayer');}
+function artMidnight(){return artTeaching('#050b1a','#203c68','#09162c','D','Ask and Receive');}
+function artDebtors(){return artTeaching('#16080a','#623040','#2b1016','2','Much Forgiven');}
+function artSheepGoats(){return artTeaching('#081018','#304858','#10202a','S','The Least of These');}
+function artFigTree(){return artTeaching('#10200b','#456a25','#1d3210','F','More Time to Fruit');}
+function artTreasure(){return artTeaching('#101005','#5a4b12','#2f2808','X','Hidden Treasure');}
+function artNet(){return artTeaching('#06121c','#1f5365','#0a2833','N','Gathered in the Net');}
+function artCost(){return artTeaching('#160e08','#5d3a1e','#2d1a0c','C','Count the Cost');}
+function artWorkers(){return artTeaching('#151000','#6b5018','#302407','W','Vineyard Grace');}
+function artLazarus(){return artTeaching('#170909','#5c2020','#2c1010','L','At the Gate');}
+function artGreatBanquet(){return artTeaching('#180818','#62285a','#2c1028','B','Come to the Feast');}
 
 // ── CARD DATA (after art functions) ──
 var CARDS=[
-  {id:'prodigal',name:'The Prodigal Son',scripture:'Luke 15:11-32',virtue:'mercy',desc:'A son returns to his father after squandering his inheritance, welcomed with joy.',ability:'Restore 2 KP you previously lost this game.',kp:4,art:artProdigal},
-  {id:'samaritan',name:'The Good Samaritan',scripture:'Luke 10:30-37',virtue:'mercy',desc:'A despised foreigner stops to help a wounded stranger when religious leaders passed by.',ability:'If played on a Mercy challenge, gain +3 KP instead of +2.',kp:4,art:artSamaritan},
-  {id:'sower',name:'The Sower',scripture:'Matthew 13:3-9',virtue:'faith',desc:'A farmer scatters seed on different soils — only the good soil yields a great harvest.',ability:'Draw 1 extra card from the deck.',kp:3,art:artSower},
-  {id:'mustard',name:'The Mustard Seed',scripture:'Matthew 13:31-32',virtue:'faith',desc:'The smallest of seeds grows into the greatest of trees, sheltering all birds.',ability:'Next round your card earns +1 KP bonus.',kp:2,art:artMustard},
-  {id:'lostsheep',name:'The Lost Sheep',scripture:'Luke 15:4-7',virtue:'mercy',desc:'A shepherd leaves 99 sheep to find the one that was lost, rejoicing when found.',ability:'Recover a previously played card back into your hand.',kp:3,art:artLostSheep},
-  {id:'talents',name:'The Talents',scripture:'Matthew 25:14-30',virtue:'generosity',desc:'Servants are given talents to invest. Those who multiply them are rewarded greatly.',ability:'Double your KP gain if you have played 3+ cards this game.',kp:5,art:artTalents},
-  {id:'virgins',name:'The Ten Virgins',scripture:'Matthew 25:1-13',virtue:'wisdom',desc:'Five wise virgins kept their lamps ready; five foolish ones missed the bridegroom.',ability:'See the next Challenge card before deciding.',kp:3,art:artVirgins},
-  {id:'pearl',name:'The Pearl of Great Price',scripture:'Matthew 13:45-46',virtue:'wisdom',desc:'A merchant sells everything to purchase the one pearl of supreme worth.',ability:'Sacrifice 2 KP to immediately gain 5 KP.',kp:3,art:artPearl},
-  {id:'richfool',name:'The Rich Fool',scripture:'Luke 12:16-21',virtue:'wisdom',desc:'A rich man builds bigger barns for himself, but God calls his soul that very night.',ability:'Any opponent who passes this round loses an extra 1 KP.',kp:2,art:artRichFool},
-  {id:'pharisee',name:'The Pharisee & Tax Collector',scripture:'Luke 18:9-14',virtue:'mercy',desc:'The humble tax collector\'s prayer is heard; the self-righteous Pharisee\'s is not.',ability:'If you are losing, gain +3 bonus KP this round.',kp:3,art:artPharisee},
-  {id:'unforgiving',name:'The Unforgiving Servant',scripture:'Matthew 18:23-35',virtue:'mercy',desc:'A forgiven servant refuses to forgive another — and faces severe consequences.',ability:'Force an opponent to lose 2 KP if they passed last round.',kp:3,art:artUnforgiving},
-  {id:'wedding',name:'The Wedding Banquet',scripture:'Matthew 22:1-14',virtue:'generosity',desc:'A king\'s invited guests refuse to come, so he fills the banquet with people from the streets.',ability:'All players gain 1 KP — yours included.',kp:4,art:artWedding},
+  {id:'prodigal',name:'The Prodigal Son',scripture:'Luke 15:11-32',virtue:'generosity',desc:'A father welcomes home a son with open-handed joy and restoration.',ability:'Gain +1 KP and draw 1 card.',kp:3,art:artProdigal,effect:'restore_draw'},
+  {id:'samaritan',name:'The Good Samaritan',scripture:'Luke 10:30-37',virtue:'mercy',desc:'A neighbor stops to help a wounded stranger others had passed by.',ability:'If this matches the challenge, gain +1 KP.',kp:4,art:artSamaritan,effect:'match_plus_one'},
+  {id:'sower',name:'The Sower',scripture:'Matthew 13:3-9',virtue:'faith',desc:'Seed is scattered widely, and good soil receives it with fruitfulness.',ability:'Draw 1 card.',kp:3,art:artSower,effect:'draw_one'},
+  {id:'mustard',name:'The Mustard Seed',scripture:'Matthew 13:31-32',virtue:'faith',desc:'A small seed grows into a sheltering tree.',ability:'Your next played card gains +1 KP.',kp:2,art:artMustard,effect:'next_plus_one'},
+  {id:'lostsheep',name:'The Lost Sheep',scripture:'Luke 15:4-7',virtue:'mercy',desc:'The shepherd seeks the one that wandered and rejoices when it is found.',ability:'Return your last played card to your hand.',kp:3,art:artLostSheep,effect:'recover_last'},
+  {id:'talents',name:'The Talents',scripture:'Matthew 25:14-30',virtue:'generosity',desc:'Servants are trusted with gifts and called to use them faithfully.',ability:'If you have played 3+ cards, gain +2 KP.',kp:4,art:artTalents,effect:'veteran_plus_two'},
+  {id:'virgins',name:'The Ten Virgins',scripture:'Matthew 25:1-13',virtue:'wisdom',desc:'The wise keep their lamps ready for the bridegroom.',ability:'Draw 1 card, then discard your lowest KP card.',kp:3,art:artVirgins,effect:'draw_discard'},
+  {id:'pearl',name:'The Pearl of Great Price',scripture:'Matthew 13:45-46',virtue:'wisdom',desc:'A merchant gives up lesser treasures for the pearl of greatest worth.',ability:'Lose 1 KP to gain +3 KP.',kp:3,art:artPearl,effect:'trade_up'},
+  {id:'richfool',name:'The Rich Fool',scripture:'Luke 12:16-21',virtue:'wisdom',desc:'A rich man stores for himself but is not rich toward God.',ability:'Gain +1 KP; passing costs 2 KP this round.',kp:2,art:artRichFool,effect:'hard_pass'},
+  {id:'pharisee',name:'The Pharisee & Tax Collector',scripture:'Luke 18:9-14',virtue:'faith',desc:'A humble prayer trusts God for mercy rather than self-praise.',ability:'If you are behind, gain +2 KP.',kp:3,art:artPharisee,effect:'behind_plus_two'},
+  {id:'unforgiving',name:'The Unforgiving Servant',scripture:'Matthew 18:23-35',virtue:'mercy',desc:'One forgiven much is called to forgive another.',ability:'The lowest-scoring player gains +1 KP.',kp:3,art:artUnforgiving,effect:'lowest_plus_one'},
+  {id:'wedding',name:'The Wedding Banquet',scripture:'Matthew 22:1-14',virtue:'generosity',desc:'The table is opened widely when the invited guests refuse.',ability:'All players gain 1 KP.',kp:4,art:artWedding,effect:'all_plus_one'},
+  {id:'builders',name:'The Wise and Foolish Builders',scripture:'Matthew 7:24-27',virtue:'faith',desc:'One house stands because it is built on the rock.',ability:'If the challenge is Faith or Wisdom, gain +1 KP.',kp:3,art:artBuilders,effect:'faith_wisdom_plus_one'},
+  {id:'widow',name:'The Persistent Widow',scripture:'Luke 18:1-8',virtue:'faith',desc:'A widow keeps seeking justice and does not lose heart.',ability:'If you are behind, gain +2 KP.',kp:3,art:artWidow,effect:'behind_plus_two'},
+  {id:'midnight',name:'The Friend at Midnight',scripture:'Luke 11:5-13',virtue:'faith',desc:'A friend keeps asking when the need is urgent.',ability:'Draw 1 card.',kp:2,art:artMidnight,effect:'draw_one'},
+  {id:'debtors',name:'The Two Debtors',scripture:'Luke 7:41-43',virtue:'mercy',desc:'The one forgiven much loves much.',ability:'If this matches the challenge, gain +1 KP.',kp:3,art:artDebtors,effect:'match_plus_one'},
+  {id:'sheepgoats',name:'The Sheep and the Goats',scripture:'Matthew 25:31-46',virtue:'mercy',desc:'The King is served in the hungry, stranger, sick, and prisoner.',ability:'You and the lowest-scoring player each gain +1 KP.',kp:3,art:artSheepGoats,effect:'share_with_lowest'},
+  {id:'figtree',name:'The Barren Fig Tree',scripture:'Luke 13:6-9',virtue:'mercy',desc:'The tree is given more care and time to bear fruit.',ability:'Gain +1 KP and your next pass costs 0.',kp:2,art:artFigTree,effect:'free_pass_next'},
+  {id:'treasure',name:'The Hidden Treasure',scripture:'Matthew 13:44',virtue:'wisdom',desc:'A hidden treasure makes the whole field worth buying.',ability:'Your next matching virtue gains +1 KP.',kp:3,art:artTreasure,effect:'next_match_plus_one'},
+  {id:'net',name:'The Net',scripture:'Matthew 13:47-50',virtue:'wisdom',desc:'A full net is drawn in and sorted with care.',ability:'Draw 1 card, then discard your lowest KP card.',kp:2,art:artNet,effect:'draw_discard'},
+  {id:'cost',name:'Counting the Cost',scripture:'Luke 14:28-33',virtue:'wisdom',desc:'A builder considers the cost before beginning the tower.',ability:'Gain +1 KP; passing costs 0 this round.',kp:3,art:artCost,effect:'free_pass_round'},
+  {id:'workers',name:'The Workers in the Vineyard',scripture:'Matthew 20:1-16',virtue:'generosity',desc:'The landowner gives with surprising generosity.',ability:'Lowest player gains +1 KP; you gain +1 KP if it is not you.',kp:3,art:artWorkers,effect:'generous_lowest'},
+  {id:'lazarus',name:'The Rich Man and Lazarus',scripture:'Luke 16:19-31',virtue:'generosity',desc:'A poor man at the gate reveals the danger of closed hands.',ability:'If you are ahead, lowest player gains +1 KP and you gain +2 KP.',kp:3,art:artLazarus,effect:'ahead_share'},
+  {id:'greatbanquet',name:'The Great Banquet',scripture:'Luke 14:15-24',virtue:'generosity',desc:'The host sends servants to welcome those usually left outside.',ability:'All players draw 1 card.',kp:3,art:artGreatBanquet,effect:'all_draw_one'},
 ];
 
 var CHALLENGES=[
-  {text:'Temptation of Pride — those who exalt themselves shall be humbled.',virtue:'mercy',bonus:'Play a Mercy card to humble the proud.'},
-  {text:'A stranger is in need on the road. Will you stop?',virtue:'mercy',bonus:'A Mercy card triples the blessing.'},
-  {text:'You are tested in the wilderness. Only faith sustains.',virtue:'faith',bonus:'A Faith card stands firm against the trial.'},
-  {text:'The harvest is plentiful but the workers are few.',virtue:'generosity',bonus:'A Generosity card multiplies the harvest.'},
-  {text:'The enemy sows weeds among the wheat. Discern wisely.',virtue:'wisdom',bonus:'A Wisdom card separates truth from deception.'},
-  {text:'Your lamp burns low. Will you be ready when He comes?',virtue:'wisdom',bonus:'Wisdom lights the way forward.'},
-  {text:'A lost soul wanders far from home.',virtue:'mercy',bonus:'Mercy brings the lost one home.'},
-  {text:'A great treasure is hidden in a field. What will you give?',virtue:'faith',bonus:'Faith gives everything for the Kingdom.'},
-  {text:'The Kingdom of Heaven is offered freely. Will you accept?',virtue:'generosity',bonus:'Generosity opens the gates wide.'},
-  {text:'You are called to forgive seventy times seven.',virtue:'mercy',bonus:'Mercy echoes the Father\'s grace.'},
-  {text:'The narrow gate stands before you. Few find it.',virtue:'wisdom',bonus:'Wisdom discerns the narrow path.'},
-  {text:'You are entrusted with much. What will you do with it?',virtue:'generosity',bonus:'Generosity returns a hundredfold.'},
+  {text:'A small act of faith may grow into something unseen.',virtue:'faith',bonus:'A Faith card earns +2 KP and +1 extra Faith growth.'},
+  {text:'You must choose between quick approval and lasting obedience.',virtue:'faith',bonus:'A Faith card stands firm for +2 KP.'},
+  {text:'A promise feels delayed, but prayer remains open.',virtue:'faith',bonus:'A Faith card gains the match bonus.'},
+  {text:'A fearful group needs someone to trust God first.',virtue:'faith',bonus:'A Faith card encourages the table for +2 KP.'},
+  {text:'The path is narrow, and the easy road is loud.',virtue:'faith',bonus:'A Faith card follows with courage for +2 KP.'},
+  {text:'A neighbor is overlooked by everyone else.',virtue:'mercy',bonus:'A Mercy card sees the person and earns +2 KP.'},
+  {text:'Someone needs forgiveness, but the wound is still fresh.',virtue:'mercy',bonus:'A Mercy card practices grace for +2 KP.'},
+  {text:'A conflict requires patience before action.',virtue:'mercy',bonus:'A Mercy card lowers the heat for +2 KP.'},
+  {text:'A tired volunteer needs care more than criticism.',virtue:'mercy',bonus:'A Mercy card restores dignity for +2 KP.'},
+  {text:'A stranger arrives with needs that interrupt your plans.',virtue:'mercy',bonus:'A Mercy card welcomes well for +2 KP.'},
+  {text:'A hard truth must be spoken with humility.',virtue:'wisdom',bonus:'A Wisdom card speaks carefully for +2 KP.'},
+  {text:'You must decide whether an opportunity is fruitful or distracting.',virtue:'wisdom',bonus:'A Wisdom card discerns the way for +2 KP.'},
+  {text:'People are reacting quickly, but the whole story is not known.',virtue:'wisdom',bonus:'A Wisdom card listens first for +2 KP.'},
+  {text:'Resources are limited, and priorities must be chosen.',virtue:'wisdom',bonus:'A Wisdom card counts the cost for +2 KP.'},
+  {text:'A public success could hide a private compromise.',virtue:'wisdom',bonus:'A Wisdom card tests the foundation for +2 KP.'},
+  {text:'You are trusted with resources that could bless others.',virtue:'generosity',bonus:'A Generosity card turns trust into blessing for +2 KP.'},
+  {text:'You have little to offer, but the need is great.',virtue:'generosity',bonus:'A Generosity card gives faithfully for +2 KP.'},
+  {text:'A newcomer needs a seat at the table.',virtue:'generosity',bonus:'A Generosity card makes room for +2 KP.'},
+  {text:'Someone else receives the honor you expected.',virtue:'generosity',bonus:'A Generosity card rejoices freely for +2 KP.'},
+  {text:'A gift can be shared quietly without praise.',virtue:'generosity',bonus:'A Generosity card serves unseen for +2 KP.'},
 ];
 
-function virtueLabel(v){return{faith:'Faith',mercy:'Mercy',wisdom:'Wisdom',generosity:'Generosity'}[v]||v;}
-function virtueIcon(v){return{faith:'⬡',mercy:'❤',wisdom:'◆',generosity:'✦'}[v]||'';}
+var PROVIDENCE=[
+  {id:'opportunity',name:'Unexpected Opportunity',text:'The next matching virtue earns +1 KP.',effect:'matching_plus_one'},
+  {id:'quiet',name:'Quiet Service',text:'Generosity cards earn +1 KP this round.',effect:'generosity_plus_one'},
+  {id:'hardroad',name:'Hard Road',text:'Passing costs 2 KP this round instead of 1.',effect:'pass_cost_two'},
+  {id:'opendoor',name:'Open Door',text:'The lowest-scoring player draws 1 card.',effect:'lowest_draw'},
+  {id:'prayer',name:'Moment of Prayer',text:'Faith cards may recover 1 lost KP.',effect:'faith_recover'},
+  {id:'mercycall',name:'Call to Mercy',text:'Mercy cards give +1 KP to the lowest-scoring player.',effect:'mercy_lowest_plus_one'},
+  {id:'sharedwisdom',name:'Shared Wisdom',text:'Wisdom cards draw 1 card, then discard the lowest KP card.',effect:'wisdom_draw_discard'},
+  {id:'hidden',name:'Hidden Blessing',text:'The lowest-scoring player gains +1 KP this round.',effect:'lowest_gain_now'}
+];
 
+// Improved game flow, scoring, accessibility, Table Mode, and print views.
+function virtueLabel(v){return{faith:'Faith',mercy:'Mercy',wisdom:'Wisdom',generosity:'Generosity'}[v]||v;}
+function virtueIcon(v){return{faith:'F',mercy:'M',wisdom:'W',generosity:'G'}[v]||'';}
+function emptyVirtues(){return{faith:0,mercy:0,wisdom:0,generosity:0};}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(ch){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function findCard(id){return CARDS.find(function(c){return c.id===id;});}
+function newPlayer(name,isAI){return{name:name,kp:0,lostKp:0,hand:[],played:[],cardsPlayed:0,virtues:emptyVirtues(),isAI:!!isAI,passed:false};}
+function addKp(player,amount){player.kp=Math.max(0,player.kp+amount);}
+function loseKp(player,amount){var loss=Math.max(0,amount);player.kp=Math.max(0,player.kp-loss);player.lostKp+=loss;}
+function drawCard(){
+  if(!G.deck) return null;
+  if(!G.deck.length&&G.discard&&G.discard.length){G.deck=shuffle(G.discard.splice(0));}
+  return G.deck.length?G.deck.pop():null;
+}
+function drawToPlayer(idx,count){
+  var p=G.players[idx],drawn=[];
+  for(var i=0;i<count;i++){var card=drawCard();if(card){p.hand.push(card);drawn.push(card.name);}}
+  return drawn;
+}
+function refillHand(player,minCards){
+  while(player.hand.length<minCards){var card=drawCard();if(!card) break;player.hand.push(card);}
+}
+function discardCard(card){if(card){G.discard.push(card);}}
+function discardLowest(player){
+  if(!player.hand.length) return null;
+  var lowest=0;
+  for(var i=1;i<player.hand.length;i++){
+    if(player.hand[i].kp<player.hand[lowest].kp) lowest=i;
+  }
+  var removed=player.hand.splice(lowest,1)[0];
+  discardCard(removed);
+  return removed;
+}
+function lowestPlayerIndex(){
+  var idx=0;
+  for(var i=1;i<G.players.length;i++){if(G.players[i].kp<G.players[idx].kp) idx=i;}
+  return idx;
+}
+function isBehind(player){return G.players.some(function(p){return p!==player&&p.kp>player.kp;});}
+function isAhead(player){return G.players.some(function(p){return p!==player&&p.kp<player.kp;});}
+function drawChallenge(){
+  if(!G.challenges.length) G.challenges=shuffle(CHALLENGES.slice());
+  return G.challenges.pop();
+}
+function drawProvidence(){
+  if(Math.random()>=0.25) return null;
+  if(!G.providence.length) G.providence=shuffle(PROVIDENCE.slice());
+  return G.providence.pop();
+}
+function startGame(numPlayers){
+  var diff=document.getElementById('difficulty')?document.getElementById('difficulty').value:'medium';
+  var single=numPlayers===1;
+  var names=single?['You','The Trial']:['Player 1','Player 2','Player 3','Player 4'].slice(0,numPlayers);
+  var players=names.map(function(name,i){return newPlayer(name,single&&i===1);});
+  G={mode:single?'single':'multi',requestedPlayers:numPlayers,numPlayers:players.length,players:players,deck:shuffle(CARDS.slice()),discard:[],challenges:shuffle(CHALLENGES.slice()),providence:shuffle(PROVIDENCE.slice()),round:1,maxRounds:7,currentChallenge:null,currentProvidence:null,activePlayer:0,pendingPlays:[],diff:diff,nextCardBonus:{},nextMatchBonus:{},nextFreePass:{},freePassThisRound:{},roundPassCost:1,hardPassThisRound:false,tableChoices:[]};
+  for(var c=0;c<5;c++){for(var p=0;p<G.players.length;p++){drawToPlayer(p,1);}}
+  document.getElementById('modeSelect').classList.add('hidden');
+  document.getElementById('gameBoard').classList.remove('hidden');
+  revealRound();
+  renderBoard();
+  log('The journey begins. May wisdom guide your hand.','info');
+}
+function startTableMode(){
+  G={mode:'table',requestedPlayers:1,numPlayers:1,players:[newPlayer('Table Group',false)],deck:shuffle(CARDS.slice()),discard:[],challenges:shuffle(CHALLENGES.slice()),providence:shuffle(PROVIDENCE.slice()),round:1,maxRounds:7,currentChallenge:null,currentProvidence:null,activePlayer:0,pendingPlays:[],diff:'medium',nextCardBonus:{},nextMatchBonus:{},nextFreePass:{},freePassThisRound:{},roundPassCost:1,hardPassThisRound:false,tableChoices:[]};
+  document.getElementById('modeSelect').classList.add('hidden');
+  document.getElementById('gameBoard').classList.remove('hidden');
+  revealRound();
+  renderBoard();
+  log('Table Mode begins. Read the challenge, discuss, then choose a parable.','info');
+}
+function revealRound(){
+  G.currentChallenge=drawChallenge();
+  G.currentProvidence=drawProvidence();
+  G.roundPassCost=1;
+  G.hardPassThisRound=false;
+  G.freePassThisRound={};
+  G.pendingPlays=[];
+  G.players.forEach(function(p){p.passed=false;});
+  if(G.currentProvidence) applyProvidenceReveal();
+  if(G.mode==='table'){
+    G.tableChoices=[];
+    for(var i=0;i<3;i++){var card=drawCard();if(card) G.tableChoices.push(card);}
+  }else{
+    G.players.forEach(function(p){refillHand(p,3);});
+  }
+}
+function applyProvidenceReveal(){
+  var pr=G.currentProvidence;
+  if(pr.effect==='pass_cost_two') G.roundPassCost=2;
+  if(pr.effect==='lowest_draw'){
+    var li=lowestPlayerIndex(),drawn=drawToPlayer(li,1);
+    if(drawn.length) log('Providence - Open Door: '+G.players[li].name+' draws 1 card.','info');
+  }
+  if(pr.effect==='lowest_gain_now'){
+    var gi=lowestPlayerIndex();
+    addKp(G.players[gi],1);
+    log('Providence - Hidden Blessing: '+G.players[gi].name+' gains 1 KP.','info');
+  }
+}
 function renderCard(card,opts){
   opts=opts||{};
   var div=document.createElement('div');
   div.className='card'+(opts.played?' played':'');
-  if(opts.faceDown){div.className+=' face-down';div.textContent='✝';return div;}
-  if(opts.selectable) div.setAttribute('data-id',card.id);
+  if(opts.faceDown){
+    div.className+=' face-down';
+    div.textContent='+';
+    div.setAttribute('aria-label','Face-down card');
+    return div;
+  }
+  if(opts.selectable){div.setAttribute('data-id',card.id);div.setAttribute('role','button');div.setAttribute('tabindex','0');div.setAttribute('aria-label','Select '+card.name+', '+virtueLabel(card.virtue)+', '+card.kp+' KP');}
   var inner=document.createElement('div');
   inner.className='card-inner';
   var art=document.createElement('div');
@@ -252,245 +510,355 @@ function renderCard(card,opts){
   art.innerHTML=card.art();
   var body=document.createElement('div');
   body.className='card-body';
-  body.innerHTML='<div class="card-name">'+card.name+'</div>'
-    +'<div class="card-scripture">'+card.scripture+'</div>'
+  body.innerHTML='<div class="card-name">'+escapeHtml(card.name)+'</div>'
+    +'<div class="card-scripture">'+escapeHtml(card.scripture)+'</div>'
     +'<span class="card-virtue virtue-'+card.virtue+'">'+virtueIcon(card.virtue)+' '+virtueLabel(card.virtue)+'</span>'
-    +'<div class="card-desc">'+card.desc+'</div>'
-    +'<div class="card-ability">✨ '+card.ability+'</div>';
+    +'<div class="card-desc">'+escapeHtml(card.desc)+'</div>'
+    +'<div class="card-ability">'+escapeHtml(card.ability)+'</div>';
   var kp=document.createElement('div');
-  kp.className='card-kp';kp.textContent='⭐'+card.kp;
+  kp.className='card-kp';kp.textContent=card.kp+' KP';
   var frame=document.createElement('div');
   frame.className='card-frame frame-'+card.virtue;
   inner.appendChild(art);inner.appendChild(body);
   div.appendChild(inner);div.appendChild(kp);div.appendChild(frame);
   return div;
 }
-
-// ── GAME STATE ──
-var G={};
-
-function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-
-function startGame(numPlayers){
-  var diff=document.getElementById('difficulty').value;
-  var deck=shuffle(CARDS.slice());
-  var challenges=shuffle(CHALLENGES.slice());
-  var names=numPlayers===1?['You','Adversary']:['Player 1','Player 2','Player 3','Player 4'].slice(0,numPlayers);
-  var players=[];
-  for(var i=0;i<numPlayers;i++){
-    players.push({name:names[i],kp:0,hand:[],played:[],isAI:numPlayers===1&&i===1,passed:false});
-  }
-  for(var c=0;c<5;c++) for(var p=0;p<players.length;p++){if(deck.length) players[p].hand.push(deck.pop());}
-  G={numPlayers:numPlayers,players:players,deck:deck,challenges:challenges,
-     round:1,maxRounds:7,currentChallenge:challenges.pop(),
-     activePlayer:0,pendingPlays:[],diff:diff,nextRoundBonus:{}};
-  document.getElementById('modeSelect').classList.add('hidden');
-  document.getElementById('gameBoard').classList.remove('hidden');
-  renderBoard();
-  log('✝ The journey begins. May wisdom guide your hand.','info');
-}
-
 function renderBoard(){
+  if(!G.players) return;
+  selectedCardId=null;
   renderScoreboard();
   renderChallenge();
   renderPlayedCards();
   renderHand();
-  document.getElementById('roundInfo').textContent='Round '+G.round+' of '+G.maxRounds;
-  var ap=G.players[G.activePlayer];
-  document.getElementById('turnBanner').textContent=(ap.isAI?'🤖 ':'')+ap.name+'\'s Turn';
-  document.getElementById('playBtn').disabled=true;
+  renderRoundInfo();
 }
-
+function renderRoundInfo(){
+  var ap=G.players[G.activePlayer];
+  var info='Round '+G.round+' of '+G.maxRounds;
+  if(G.mode==='multi') info+=' | '+ap.name+' of '+G.numPlayers;
+  if(G.mode==='single') info+=' | You vs The Trial';
+  if(G.mode==='table') info+=' | Table Mode';
+  document.getElementById('roundInfo').textContent=info;
+  document.getElementById('turnBanner').textContent=G.mode==='table'?'Table Discussion':ap.name+"'s Turn";
+}
+function renderVirtueChips(player){
+  return ['faith','mercy','wisdom','generosity'].map(function(v){
+    return '<span class="virtue-chip virtue-'+v+'" title="'+virtueLabel(v)+'">'+virtueIcon(v)+' '+player.virtues[v]+'</span>';
+  }).join('');
+}
 function renderScoreboard(){
-  var colors=['#4ac87b','#c84a6a','#4a7bc8','#c8a84a','#a84ac8'];
   var sb=document.getElementById('scoreboard');
   sb.innerHTML='';
-  G.players.forEach(function(p,i){
+  G.players.forEach(function(p){
     var d=document.createElement('div');d.className='score-block';
-    d.innerHTML='<div class="label"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+colors[i]+';margin-right:5px"></span>'+p.name+'</div><div class="value">'+p.kp+'</div><div style="font-size:.7rem;color:#c9a84c55">KP</div>';
+    d.innerHTML='<div class="label">'+escapeHtml(p.name)+'</div><div class="value">'+p.kp+'</div><div class="kp-label">Kingdom Points</div><div class="virtue-chips">'+renderVirtueChips(p)+'</div>';
     sb.appendChild(d);
-    if(i<G.players.length-1){var sep=document.createElement('div');sep.style.cssText='color:#c9a84c44;font-size:1.5rem';sep.textContent='|';sb.appendChild(sep);}
   });
 }
-
 function renderChallenge(){
   var ch=G.currentChallenge;
   document.getElementById('challengeText').textContent=ch.text;
-  document.getElementById('challengeVirtue').textContent=virtueIcon(ch.virtue)+' '+virtueLabel(ch.virtue)+' Challenge — '+ch.bonus;
+  document.getElementById('challengeVirtue').textContent=virtueIcon(ch.virtue)+' '+virtueLabel(ch.virtue)+' Challenge - '+ch.bonus;
+  var area=document.getElementById('providenceArea');
+  if(area){
+    if(G.currentProvidence){
+      area.classList.remove('hidden');
+      area.innerHTML='<strong>Providence: '+escapeHtml(G.currentProvidence.name)+'</strong><span>'+escapeHtml(G.currentProvidence.text)+'</span>';
+    }else{
+      area.classList.add('hidden');
+      area.innerHTML='';
+    }
+  }
 }
-
 function renderPlayedCards(){
   var row=document.getElementById('playedCards');row.innerHTML='';
   G.pendingPlays.forEach(function(pp){
-    var card=CARDS.find(function(c){return c.id===pp.cardId;});
+    var card=findCard(pp.cardId);
     if(card){var el=renderCard(card,{played:true});el.title=pp.playerName+': '+card.name;row.appendChild(el);}
   });
 }
-
 var selectedCardId=null;
-
 function renderHand(){
-  var row=document.getElementById('handCards');row.innerHTML='';
-  var ap=G.players[G.activePlayer];
-  var label=document.getElementById('handLabel');
-  document.getElementById('passBtn').disabled=false;
-  if(ap.isAI){
-    label.textContent='🤖 Adversary is thinking…';
-    for(var i=0;i<ap.hand.length;i++) row.appendChild(renderCard(null,{faceDown:true}));
-    document.getElementById('playBtn').disabled=true;
-    document.getElementById('passBtn').disabled=true;
-    setTimeout(aiPlay,1400);
+  var row=document.getElementById('handCards'),label=document.getElementById('handLabel'),play=document.getElementById('playBtn'),pass=document.getElementById('passBtn');
+  row.innerHTML='';
+  play.disabled=true;
+  play.textContent=G.mode==='table'?'Choose This Parable':'Play Selected Card';
+  pass.classList.toggle('hidden',G.mode==='table');
+  if(G.mode==='table'){
+    label.textContent='Which parable best speaks to this situation?';
+    G.tableChoices.forEach(function(card){appendSelectableCard(row,card);});
     return;
   }
-  label.textContent='✋ '+ap.name+'\'s Hand — click a card to select, then Play';
-  ap.hand.forEach(function(card){
-    var el=renderCard(card,{selectable:true});
-    el.addEventListener('click',function(){selectCard(card.id);});
-    row.appendChild(el);
-  });
+  var ap=G.players[G.activePlayer];
+  pass.disabled=false;
+  pass.textContent='Pass (-'+calculatePassCost(G.activePlayer)+' KP)';
+  if(ap.isAI){
+    label.textContent='The Trial is thinking...';
+    for(var i=0;i<Math.max(ap.hand.length,1);i++) row.appendChild(renderCard(null,{faceDown:true}));
+    play.disabled=true;pass.disabled=true;
+    setTimeout(aiPlay,900);
+    return;
+  }
+  label.textContent=ap.name+"'s Hand - select a card, then play";
+  if(!ap.hand.length){label.textContent=ap.name+"'s Hand - no cards available; you may pass";return;}
+  ap.hand.forEach(function(card){appendSelectableCard(row,card);});
 }
-
+function appendSelectableCard(row,card){
+  var el=renderCard(card,{selectable:true});
+  el.addEventListener('click',function(){selectCard(card.id);});
+  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();selectCard(card.id);}});
+  row.appendChild(el);
+}
 function selectCard(id){
   selectedCardId=id;
-  document.querySelectorAll('#handCards .card').forEach(function(c){
-    c.classList.toggle('selected',c.getAttribute('data-id')===id);
-  });
+  document.querySelectorAll('#handCards .card').forEach(function(c){c.classList.toggle('selected',c.getAttribute('data-id')===id);});
   document.getElementById('playBtn').disabled=false;
 }
-
 function playSelected(){
   if(!selectedCardId) return;
-  var ap=G.players[G.activePlayer];
-  var idx=ap.hand.findIndex(function(c){return c.id===selectedCardId;});
-  if(idx===-1) return;
-  var card=ap.hand.splice(idx,1)[0];
-  ap.played.push(card.id);
-  G.pendingPlays.push({playerName:ap.name,cardId:card.id,playerId:G.activePlayer});
-  ap.passed=false;
+  var ap=G.players[G.activePlayer],card=null;
+  if(G.mode==='table'){
+    var tidx=G.tableChoices.findIndex(function(c){return c.id===selectedCardId;});
+    if(tidx<0) return;
+    card=G.tableChoices[tidx];
+    G.tableChoices.forEach(function(c){if(c.id!==card.id) discardCard(c);});
+    G.tableChoices=[card];
+  }else{
+    var idx=ap.hand.findIndex(function(c){return c.id===selectedCardId;});
+    if(idx<0) return;
+    card=ap.hand.splice(idx,1)[0];
+  }
   selectedCardId=null;
-  document.getElementById('playBtn').disabled=true;
-  resolvePlay(G.activePlayer,card);
+  ap.played.push(card.id);
+  ap.cardsPlayed++;
+  ap.passed=false;
+  G.pendingPlays.push({playerName:ap.name,cardId:card.id,playerId:G.activePlayer});
+  var summary=resolvePlay(G.activePlayer,card);
+  showResultSummary(summary,ap.isAI);
 }
-
+function calculatePassCost(idx){
+  if(G.freePassThisRound[idx]) return 0;
+  if(G.nextFreePass[idx]) return 0;
+  return Math.max(G.roundPassCost||1,G.hardPassThisRound?2:1);
+}
 function passRound(){
   var ap=G.players[G.activePlayer];
-  ap.kp=Math.max(0,ap.kp-1);ap.passed=true;
-  var rfPlayed=G.pendingPlays.some(function(p){return p.cardId==='richfool';});
-  if(rfPlayed){ap.kp=Math.max(0,ap.kp-1);log('⚡ Rich Fool: passing costs an extra 1 KP!','bad');}
-  log(ap.name+' passes and loses 1 KP.','bad');
-  advanceTurn();
-}
-
-function resolvePlay(playerIdx,card){
-  var p=G.players[playerIdx];var ch=G.currentChallenge;
-  var earned=card.kp;var msgs=[];
-  if(card.virtue===ch.virtue){earned+=2;msgs.push('+2 virtue bonus!');}
-  if(G.nextRoundBonus&&G.nextRoundBonus[playerIdx]){earned+=G.nextRoundBonus[playerIdx];msgs.push('+'+G.nextRoundBonus[playerIdx]+' Mustard Seed bonus!');delete G.nextRoundBonus[playerIdx];}
-  if(card.id==='prodigal'){p.kp+=2;msgs.push('Prodigal Son: +2 KP restored!');}
-  if(card.id==='samaritan'&&card.virtue===ch.virtue){earned+=1;msgs.push('Good Samaritan: +1 extra!');}
-  if(card.id==='sower'){if(G.deck.length){p.hand.push(G.deck.pop());msgs.push('Sower: drew an extra card!');}}
-  if(card.id==='mustard'){G.nextRoundBonus[playerIdx]=(G.nextRoundBonus[playerIdx]||0)+1;msgs.push('Mustard Seed: +1 bonus stored for next round!');}
-  if(card.id==='lostsheep'){if(p.played.length>1){var recId=p.played[p.played.length-2];var rec=CARDS.find(function(c){return c.id===recId;});if(rec){p.hand.push(rec);msgs.push('Lost Sheep: recovered '+rec.name+'!');}}}
-  if(card.id==='talents'){if(p.played.length>=3){earned*=2;msgs.push('Talents: KP doubled!');}}
-  if(card.id==='pearl'){p.kp=Math.max(0,p.kp-2);earned+=5;msgs.push('Pearl: -2 KP, +5 KP!');}
-  if(card.id==='pharisee'){var losing=G.players.some(function(op){return op!==p&&op.kp>p.kp;});if(losing){earned+=3;msgs.push('Pharisee: +3 KP for being behind!');}}
-  if(card.id==='wedding'){G.players.forEach(function(op){op.kp+=1;});msgs.push('Wedding Banquet: all players +1 KP!');}
-  p.kp+=earned;
-  log(p.name+' plays '+card.name+' — +'+earned+' KP. '+msgs.join(' '),p.isAI?'bad':'good');
+  var cost=calculatePassCost(G.activePlayer);
+  if(G.nextFreePass[G.activePlayer]) delete G.nextFreePass[G.activePlayer];
+  loseKp(ap,cost);
+  ap.passed=true;
+  log(ap.name+' passes'+(cost?(' and loses '+cost+' KP.'):' at no KP cost.'),cost?'bad':'info');
   renderScoreboard();
   advanceTurn();
 }
-
+function applyVirtueGrowth(player,card,matched){
+  var growth=matched?2:1;
+  player.virtues[card.virtue]+=growth;
+  return growth;
+}
+function resolvePlay(playerIdx,card){
+  var p=G.players[playerIdx],ch=G.currentChallenge,matched=card.virtue===ch.virtue;
+  var matchBonus=matched?2:0,abilityBonus=0,providenceBonus=0,bonusLines=[],abilityLines=[],providenceLines=[];
+  var growth=applyVirtueGrowth(p,card,matched);
+  if(G.nextCardBonus[playerIdx]){bonusLines.push('Stored blessing: +'+G.nextCardBonus[playerIdx]+' KP');abilityBonus+=G.nextCardBonus[playerIdx];delete G.nextCardBonus[playerIdx];}
+  if(matched&&G.nextMatchBonus[playerIdx]){bonusLines.push('Prepared response: +'+G.nextMatchBonus[playerIdx]+' KP');abilityBonus+=G.nextMatchBonus[playerIdx];delete G.nextMatchBonus[playerIdx];}
+  function line(text){abilityLines.push(text);}
+  switch(card.effect){
+    case 'restore_draw': abilityBonus+=1; line('+1 KP; drew '+drawDescription(playerIdx)); break;
+    case 'match_plus_one': if(matched){abilityBonus+=1;line('+1 KP for matching the challenge.');} break;
+    case 'draw_one': line('Drew '+drawDescription(playerIdx)); break;
+    case 'next_plus_one': G.nextCardBonus[playerIdx]=(G.nextCardBonus[playerIdx]||0)+1; line('Your next played card gains +1 KP.'); break;
+    case 'recover_last': var rec=recoverPreviousCard(p); line(rec?'Recovered '+rec.name+'.':'No previous card to recover.'); break;
+    case 'veteran_plus_two': if(p.cardsPlayed>=3){abilityBonus+=2;line('+2 KP for faithful stewardship.');} break;
+    case 'draw_discard': line(drawDiscardDescription(p,playerIdx)); break;
+    case 'trade_up': loseKp(p,1); abilityBonus+=3; line('Lost 1 KP to gain +3 KP.'); break;
+    case 'hard_pass': abilityBonus+=1; G.hardPassThisRound=true; line('+1 KP; passing costs 2 KP this round.'); break;
+    case 'behind_plus_two': if(isBehind(p)){abilityBonus+=2;line('+2 KP while behind.');} break;
+    case 'lowest_plus_one': line(lowestGainDescription(1)); break;
+    case 'all_plus_one': abilityBonus+=1; G.players.forEach(function(op){if(op!==p)addKp(op,1);}); line('All players gain 1 KP.'); break;
+    case 'faith_wisdom_plus_one': if(ch.virtue==='faith'||ch.virtue==='wisdom'){abilityBonus+=1;line('+1 KP on a Faith or Wisdom challenge.');} break;
+    case 'share_with_lowest': abilityBonus+=1; line(shareWithLowestDescription(playerIdx)); break;
+    case 'free_pass_next': abilityBonus+=1; G.nextFreePass[playerIdx]=true; line('+1 KP; your next pass costs 0.'); break;
+    case 'next_match_plus_one': G.nextMatchBonus[playerIdx]=(G.nextMatchBonus[playerIdx]||0)+1; line('Your next matching virtue gains +1 KP.'); break;
+    case 'free_pass_round': abilityBonus+=1; G.freePassThisRound[playerIdx]=true; line('+1 KP; passing costs 0 this round.'); break;
+    case 'generous_lowest': line(generousLowestDescription(playerIdx,function(){abilityBonus+=1;})); break;
+    case 'ahead_share': if(isAhead(p)){var li=lowestPlayerIndex();if(li!==playerIdx)addKp(G.players[li],1);abilityBonus+=2;line('Lowest player gains +1 KP; you gain +2 KP.');} break;
+    case 'all_draw_one': G.players.forEach(function(op,i){drawToPlayer(i,1);}); line('All players draw 1 card.'); break;
+  }
+  var pr=G.currentProvidence;
+  if(pr){
+    if(pr.effect==='matching_plus_one'&&matched){providenceBonus+=1;providenceLines.push('+1 KP for a matching virtue.');}
+    if(pr.effect==='generosity_plus_one'&&card.virtue==='generosity'){providenceBonus+=1;providenceLines.push('+1 KP for Generosity.');}
+    if(pr.effect==='faith_recover'&&card.virtue==='faith'&&p.lostKp>0){p.lostKp--;providenceBonus+=1;providenceLines.push('Recovered 1 lost KP.');}
+    if(pr.effect==='mercy_lowest_plus_one'&&card.virtue==='mercy'){var ml=lowestPlayerIndex();if(ml===playerIdx){providenceBonus+=1;}else{addKp(G.players[ml],1);}providenceLines.push('Lowest-scoring player gains +1 KP.');}
+    if(pr.effect==='wisdom_draw_discard'&&card.virtue==='wisdom'){providenceLines.push(drawDiscardDescription(p,playerIdx));}
+  }
+  var total=card.kp+matchBonus+abilityBonus+providenceBonus;
+  addKp(p,total);
+  renderScoreboard();
+  renderPlayedCards();
+  log(p.name+' plays '+card.name+' for '+total+' KP.',p.isAI?'bad':'good');
+  return{player:p,card:card,base:card.kp,match:matchBonus,matched:matched,ability:abilityBonus,providence:providenceBonus,total:total,growth:growth,abilityLines:bonusLines.concat(abilityLines),providenceLines:providenceLines};
+}
+function drawDescription(playerIdx){var drawn=drawToPlayer(playerIdx,1);return drawn.length?drawn[0]:'no card';}
+function drawDiscardDescription(player,playerIdx){var drawn=drawToPlayer(playerIdx,1),discarded=discardLowest(player);return 'Drew '+(drawn[0]||'no card')+(discarded?', discarded '+discarded.name+'.':'.');}
+function recoverPreviousCard(player){
+  if(player.played.length<2) return null;
+  var rec=findCard(player.played[player.played.length-2]);
+  if(rec) player.hand.push(rec);
+  return rec;
+}
+function lowestGainDescription(amount){var li=lowestPlayerIndex();addKp(G.players[li],amount);return G.players[li].name+' gains +'+amount+' KP.';}
+function shareWithLowestDescription(playerIdx){var li=lowestPlayerIndex();if(li!==playerIdx)addKp(G.players[li],1);return (li===playerIdx?'You are the lowest player.':'Lowest player gains +1 KP.')+' You gain +1 KP.';}
+function generousLowestDescription(playerIdx,addSelfBonus){var li=lowestPlayerIndex();addKp(G.players[li],1);if(li!==playerIdx){addSelfBonus();return G.players[li].name+' gains +1 KP; you gain +1 KP.';}return 'You are the lowest player and gain +1 KP.';}
+function showResultSummary(s,isAI){
+  var ability=s.abilityLines.length?s.abilityLines.join('<br>'):'No extra ability bonus.';
+  var prov=s.providenceLines.length?s.providenceLines.join('<br>'):(G.currentProvidence?'No KP change from Providence.':'None this round.');
+  var html='<div class="result-summary">'
+    +'<div><strong>Played Card:</strong> '+escapeHtml(s.card.name)+'</div>'
+    +'<div><strong>Base:</strong> +'+s.base+' KP</div>'
+    +'<div><strong>Challenge Match:</strong> '+(s.match?('+'+s.match+' '+virtueLabel(s.card.virtue)+' bonus'):'No match bonus')+'</div>'
+    +'<div><strong>Ability:</strong> '+ability+'</div>'
+    +'<div><strong>Providence:</strong> '+prov+'</div>'
+    +'<div class="result-total"><strong>Total:</strong> +'+s.total+' KP</div>'
+    +'<div><strong>Virtue Growth:</strong> '+virtueLabel(s.card.virtue)+' +'+s.growth+'</div>';
+  if(G.mode==='table') html+='<div class="discussion-prompts"><strong>Discussion</strong><ul><li>Why does this parable fit the situation?</li><li>What virtue does this response require?</li><li>Where might this show up in real life?</li><li>What would obedience look like this week?</li></ul></div>';
+  html+='</div>';
+  showModal(isAI?'The Trial plays...':'Result Summary',html,[{label:'Continue',fn:function(){hideModal();continueAfterResult();}}]);
+  if(isAI){setTimeout(function(){if(!document.getElementById('modal').classList.contains('hidden')){hideModal();continueAfterResult();}},1000);}
+}
+function continueAfterResult(){
+  if(G.mode==='table'){endRound();return;}
+  advanceTurn();
+}
+function playerHasActed(idx){return G.players[idx].passed||G.pendingPlays.some(function(pp){return pp.playerId===idx;});}
 function advanceTurn(){
   renderPlayedCards();
-  var found=false;var next=G.activePlayer;
-  for(var i=1;i<=G.numPlayers;i++){
-    var idx=(G.activePlayer+i)%G.numPlayers;
-    var played=G.pendingPlays.some(function(pp){return pp.playerId===idx;});
-    if(!played&&!G.players[idx].passed){next=idx;found=true;break;}
-  }
-  if(!found){setTimeout(endRound,500);return;}
-  G.activePlayer=next;renderBoard();
+  var next=-1;
+  for(var i=1;i<=G.numPlayers;i++){var idx=(G.activePlayer+i)%G.numPlayers;if(!playerHasActed(idx)){next=idx;break;}}
+  if(next<0){endRound();return;}
+  G.activePlayer=next;
+  if(G.mode==='multi'){showPassScreen(next);}else{renderBoard();}
 }
-
+function showPassScreen(nextIdx){
+  document.getElementById('handCards').innerHTML='';
+  document.getElementById('handLabel').textContent='Hand hidden for pass-and-play privacy.';
+  renderRoundInfo();
+  showModal('Pass the device', '<p>Round '+G.round+' of '+G.maxRounds+'</p><p>Pass the device to '+escapeHtml(G.players[nextIdx].name)+'.</p><p>'+escapeHtml(G.players[nextIdx].name)+' is Player '+(nextIdx+1)+' of '+G.numPlayers+'.</p>', [{label:'Begin '+G.players[nextIdx].name+' Turn',fn:function(){hideModal();renderBoard();}}]);
+}
 function endRound(){
   G.round++;
-  G.pendingPlays=[];
-  G.players.forEach(function(p){p.passed=false;});
-  if(G.numPlayers===1&&G.players[0].kp>=21){endGame(true);return;}
-  if(G.numPlayers===1&&G.players[1].kp>=21){endGame(false);return;}
-  if(G.round>G.maxRounds){endGame(null);return;}
-  G.currentChallenge=G.challenges.length>0?G.challenges.pop():CHALLENGES[Math.floor(Math.random()*CHALLENGES.length)];
-  G.players.forEach(function(p){if(G.deck.length&&p.hand.length<3) p.hand.push(G.deck.pop());});
+  if(G.round>G.maxRounds){endGame(null,false);return;}
+  revealRound();
   G.activePlayer=0;
   renderBoard();
-  log('━━━ Round '+G.round+' begins ━━━','info');
+  log('Round '+G.round+' begins.','info');
 }
-
+function strongestVirtue(player){
+  var vals=['faith','mercy','wisdom','generosity'],max=Math.max(player.virtues.faith,player.virtues.mercy,player.virtues.wisdom,player.virtues.generosity);
+  var top=vals.filter(function(v){return player.virtues[v]===max;});
+  return top.length===1?top[0]:'balanced';
+}
+function profileForPlayer(player){
+  var strong=strongestVirtue(player);
+  var profiles={
+    faith:['The Faithful Sower','You consistently chose trust, courage, and prayerful obedience when the path was uncertain.'],
+    mercy:['The Merciful Neighbor','You consistently chose compassion, restoration, and care for those others might overlook.'],
+    wisdom:['The Wise Steward','You consistently chose discernment, humility, and careful attention to what bears good fruit.'],
+    generosity:['The Generous Servant','You consistently chose open hands, shared blessing, and room at the table.'],
+    balanced:['The Kingdom Builder','Your responses were balanced across the virtues, showing a broad practice of Kingdom life.']
+  };
+  return{virtue:strong,title:profiles[strong][0],encouragement:profiles[strong][1]};
+}
 function endGame(won,quit){
-  var title,body;
-  if(quit){title='Game Ended';body='May you continue to seek His Kingdom. Come back soon!';}
-  else if(G.numPlayers===1){
-    if(won===true){title='✝ Victory!';body='You reached '+G.players[0].kp+' Kingdom Points! "Well done, good and faithful servant." — Matthew 25:21';}
-    else if(won===false){title='The Adversary Prevails';body='The Adversary reached '+G.players[1].kp+' KP. "Be strong and courageous." — Joshua 1:9';}
-    else{var w=G.players[0].kp>G.players[1].kp?'You win!':G.players[1].kp>G.players[0].kp?'Adversary wins!':'A draw!';title='Game Over';body=w+' You: '+G.players[0].kp+' KP | Adversary: '+G.players[1].kp+' KP';}
-  } else {
-    var sorted=G.players.slice().sort(function(a,b){return b.kp-a.kp;});
-    title='Game Over';
-    body=(sorted[0].kp===sorted[1].kp?'It\'s a tie!':'🏆 '+sorted[0].name+' wins!')+'<br>'+sorted.map(function(p,i){return(i+1)+'. '+p.name+': '+p.kp+' KP';}).join('<br>');
+  var title='Game Complete',body='';
+  if(quit){title='Game Ended';body='<p>May you continue to seek His Kingdom.</p>';}
+  else{
+    if(G.mode==='single'){
+      title=G.players[0].kp>=G.players[1].kp?'Victory':'The Trial prevails.';
+    }else if(G.mode==='table'){
+      title='Table Mode Complete';
+    }else{
+      var sorted=G.players.slice().sort(function(a,b){return b.kp-a.kp;});
+      title=sorted[0].kp===sorted[1].kp?'A Shared Finish':sorted[0].name+' wins';
+    }
+    body+='<div class="profiles">';
+    G.players.forEach(function(p){
+      var prof=profileForPlayer(p);
+      body+='<div class="profile-card"><h3>'+escapeHtml(p.name)+'</h3><p><strong>'+p.kp+' KP</strong></p><p>Strongest Virtue: '+(prof.virtue==='balanced'?'Balanced':virtueLabel(prof.virtue))+'</p><p>Profile: '+escapeHtml(prof.title)+'</p><p>'+escapeHtml(prof.encouragement)+'</p><p>Cards played: '+p.cardsPlayed+'</p></div>';
+    });
+    body+='</div>';
   }
-  showModal(title,body,[
-    {label:'Play Again',fn:function(){hideModal();var n=G.numPlayers||1;G={};document.getElementById('gameBoard').classList.add('hidden');document.getElementById('msgLog').innerHTML='';startGame(n);}},
-    {label:'Main Menu',fn:function(){hideModal();G={};document.getElementById('gameBoard').classList.add('hidden');document.getElementById('msgLog').innerHTML='';document.getElementById('modeSelect').classList.remove('hidden');}}
-  ]);
+  showModal(title,body,[{label:'Play Again',fn:function(){hideModal();var mode=G.mode,n=G.requestedPlayers||1;G={};document.getElementById('msgLog').innerHTML='';if(mode==='table')startTableMode();else startGame(n);}},{label:'Main Menu',fn:function(){hideModal();G={};document.getElementById('gameBoard').classList.add('hidden');document.getElementById('msgLog').innerHTML='';document.getElementById('modeSelect').classList.remove('hidden');}}]);
 }
-
+function estimateCardScore(card){
+  var score=card.kp+(card.virtue===G.currentChallenge.virtue?2:0);
+  if(card.effect==='match_plus_one'&&card.virtue===G.currentChallenge.virtue) score+=1;
+  if(card.effect==='veteran_plus_two') score+=1;
+  if(card.effect==='behind_plus_two') score+=1;
+  if(card.effect==='trade_up') score+=2;
+  return score;
+}
 function aiPlay(){
   var ap=G.players[G.activePlayer];
-  if(!ap||!ap.isAI||ap.hand.length===0){passRound();return;}
-  var ch=G.currentChallenge;var card;
-  if(G.diff==='easy'){
-    card=ap.hand[Math.floor(Math.random()*ap.hand.length)];
-  } else if(G.diff==='medium'){
-    card=ap.hand.find(function(c){return c.virtue===ch.virtue;})||ap.hand.slice().sort(function(a,b){return b.kp-a.kp;})[0];
-  } else {
-    card=ap.hand.slice().sort(function(a,b){var va=b.kp+(b.virtue===ch.virtue?2:0);var vb=a.kp+(a.virtue===ch.virtue?2:0);return va-vb;})[0];
-  }
-  var idx=ap.hand.indexOf(card);
-  ap.hand.splice(idx,1);ap.played.push(card.id);
-  G.pendingPlays.push({playerName:ap.name,cardId:card.id,playerId:G.activePlayer});
-  ap.passed=false;
-  resolvePlay(G.activePlayer,card);
+  if(!ap||!ap.isAI) return;
+  refillHand(ap,1);
+  if(!ap.hand.length){passRound();return;}
+  var ch=G.currentChallenge,card;
+  if(G.diff==='easy') card=ap.hand[Math.floor(Math.random()*ap.hand.length)];
+  else if(G.diff==='medium') card=ap.hand.find(function(c){return c.virtue===ch.virtue;})||ap.hand.slice().sort(function(a,b){return estimateCardScore(b)-estimateCardScore(a);})[0];
+  else card=ap.hand.slice().sort(function(a,b){return estimateCardScore(b)-estimateCardScore(a);})[0];
+  selectedCardId=card.id;
+  playSelected();
 }
-
 function showModal(title,body,btns){
-  document.getElementById('modalTitle').textContent=title;
-  document.getElementById('modalBody').innerHTML=body;
-  var bc=document.getElementById('modalBtns');bc.innerHTML='';
+  var titleEl=document.getElementById('modalTitle'),bodyEl=document.getElementById('modalBody'),bc=document.getElementById('modalBtns');
+  titleEl.textContent=title;
+  bodyEl.innerHTML=body;
+  bc.innerHTML='';
   btns.forEach(function(b){var el=document.createElement('button');el.className='btn';el.textContent=b.label;el.onclick=b.fn;bc.appendChild(el);});
   document.getElementById('modal').classList.remove('hidden');
+  var first=bc.querySelector?bc.querySelector('button'):null;if(first) first.focus();
 }
 function hideModal(){document.getElementById('modal').classList.add('hidden');}
-
 function log(msg,type){
-  var ml=document.getElementById('msgLog');
+  var ml=document.getElementById('msgLog');if(!ml)return;
   var d=document.createElement('div');d.className='msg'+(type?' '+type:'');d.textContent=msg;
   ml.insertBefore(d,ml.firstChild);
   while(ml.children.length>30) ml.removeChild(ml.lastChild);
 }
-
 function showTab(id,btn){
   document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
   document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
   document.getElementById(id+'Panel').classList.add('active');
-  btn.classList.add('active');
+  if(btn) btn.classList.add('active');
   if(id==='print') buildPrintGrid();
 }
-
+function renderPrintCard(title,body,kind,virtue){
+  var d=document.createElement('div');d.className='print-card '+(virtue?'frame-'+virtue:'');
+  d.innerHTML='<h3>'+escapeHtml(title)+'</h3><p class="print-kind">'+escapeHtml(kind)+'</p><p>'+escapeHtml(body)+'</p>';
+  return d;
+}
 function buildPrintGrid(){
   var grid=document.getElementById('printGrid');
-  if(grid.children.length) return;
-  CARDS.forEach(function(card){grid.appendChild(renderCard(card,{}));});
+  grid.innerHTML='';
+  var cards=document.createElement('section');cards.className='print-section print-cards';cards.innerHTML='<h2>Parable Cards</h2><div class="print-grid-inner"></div>';
+  var cg=cards.querySelector('.print-grid-inner');CARDS.forEach(function(card){cg.appendChild(renderCard(card,{}));});
+  var challenges=document.createElement('section');challenges.className='print-section print-cards';challenges.innerHTML='<h2>Challenge Cards</h2><div class="print-grid-inner"></div>';
+  var chg=challenges.querySelector('.print-grid-inner');CHALLENGES.forEach(function(ch){chg.appendChild(renderPrintCard(virtueLabel(ch.virtue)+' Challenge',ch.text+' '+ch.bonus,'Challenge',ch.virtue));});
+  var prov=document.createElement('section');prov.className='print-section print-cards';prov.innerHTML='<h2>Providence Cards</h2><div class="print-grid-inner"></div>';
+  var pg=prov.querySelector('.print-grid-inner');PROVIDENCE.forEach(function(pr){pg.appendChild(renderPrintCard(pr.name,pr.text,'Providence',''));});
+  var backs=document.createElement('section');backs.className='print-section print-cards';backs.innerHTML='<h2>Card Backs</h2><div class="print-grid-inner"></div>';
+  var bg=backs.querySelector('.print-grid-inner');for(var i=0;i<8;i++){var back=document.createElement('div');back.className='card face-down print-back';back.textContent='Parables & Providence';bg.appendChild(back);}
+  var rules=document.createElement('section');rules.className='print-section print-rules';rules.innerHTML='<h2>One-Page Rules</h2><p>Reveal a challenge. Choose a parable card. Gain base KP, +2 KP for matching the challenge virtue, resolve the card ability, then mark virtue growth. Play 7 rounds. Highest KP wins. In Table Mode, discuss three revealed parables and choose one together.</p><p>Kingdom Points are the main score. Virtues track the kind of response practiced: Faith, Mercy, Wisdom, and Generosity.</p>';
+  var score=document.createElement('section');score.className='print-section print-score';score.innerHTML='<h2>Score Sheet</h2><table class="score-sheet"><tr><th>Round</th><th>Player</th><th>KP</th><th>Faith</th><th>Mercy</th><th>Wisdom</th><th>Generosity</th></tr>'+Array(28).fill(0).map(function(_,i){return'<tr><td>'+(Math.floor(i/4)+1)+'</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';}).join('')+'</table>';
+  grid.appendChild(cards);grid.appendChild(challenges);grid.appendChild(prov);grid.appendChild(backs);grid.appendChild(rules);grid.appendChild(score);
+}
+function printSection(mode){
+  buildPrintGrid();
+  document.body.setAttribute('data-print',mode);
+  window.print();
+  setTimeout(function(){document.body.removeAttribute('data-print');},300);
 }
 </script>
 </body>
