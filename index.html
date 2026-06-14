@@ -1,1 +1,497 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parables & Providence</title>
+<style>
+  :root{--gold:#c9a84c;--gold2:#f0d080;--dark:#1a1008;--brown:#3b2008;--cream:#f5ecd7;--faith:#4a7bc8;--mercy:#c84a6a;--wisdom:#7b4ac8;--generosity:#4ac87b;--bg:#0d0802}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--cream);font-family:Georgia,serif;min-height:100vh;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0%,#3b1a00 0%,#0d0802 70%);z-index:-2}
+  body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23c9a84c' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");z-index:-1}
+  header{text-align:center;padding:20px 10px 10px;border-bottom:1px solid #c9a84c44}
+  header h1{font-size:clamp(1.6rem,4vw,2.8rem);color:var(--gold2);text-shadow:0 0 30px #c9a84c88;letter-spacing:3px}
+  header p{color:#c9a84c99;font-style:italic;font-size:1rem;margin-top:4px}
+  .tabs{display:flex;justify-content:center;gap:6px;padding:14px 10px;flex-wrap:wrap}
+  .tab{padding:8px 22px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:.85rem;letter-spacing:1px;cursor:pointer;border-radius:3px;transition:.2s}
+  .tab:hover,.tab.active{background:var(--gold);color:var(--dark)}
+  .panel{display:none;padding:10px 16px 30px;max-width:1100px;margin:0 auto}
+  .panel.active{display:block}
+  .card{width:180px;height:270px;border-radius:12px;position:relative;cursor:pointer;flex-shrink:0;transition:transform .25s,box-shadow .25s;overflow:hidden;box-shadow:0 4px 18px #0008}
+  .card:hover{transform:translateY(-8px) scale(1.04);box-shadow:0 12px 35px #000a}
+  .card.selected{transform:translateY(-14px) scale(1.06);box-shadow:0 0 0 3px var(--gold2),0 12px 35px #000a}
+  .card.played{opacity:.45;pointer-events:none}
+  .card.face-down{background:linear-gradient(135deg,#2a1400,#4a2800);border:2px solid #c9a84c55;display:flex;align-items:center;justify-content:center;font-size:4rem;color:#c9a84c33}
+  .card-inner{position:absolute;inset:0;display:flex;flex-direction:column}
+  .card-art{height:105px;position:relative;overflow:hidden;flex-shrink:0}
+  .card-art svg{width:100%;height:100%}
+  .card-body{padding:6px 7px 4px;flex:1;display:flex;flex-direction:column;gap:2px;background:linear-gradient(to bottom,#1e0e04,#2a1408)}
+  .card-name{font-size:.72rem;font-weight:700;color:var(--gold2);text-align:center;line-height:1.2;border-bottom:1px solid #c9a84c44;padding-bottom:3px}
+  .card-scripture{font-size:.6rem;color:#c9a84c99;text-align:center;font-style:italic}
+  .card-virtue{display:inline-block;font-size:.58rem;padding:1px 6px;border-radius:10px;font-weight:600;margin:2px auto 0;text-align:center;letter-spacing:.5px;text-transform:uppercase}
+  .card-desc{font-size:.6rem;color:#e8d5b0;line-height:1.35;flex:1;overflow:hidden}
+  .card-ability{font-size:.58rem;color:#c9a84c;font-style:italic;border-top:1px solid #c9a84c33;padding-top:2px;line-height:1.3}
+  .card-kp{position:absolute;bottom:5px;right:7px;font-size:.75rem;color:var(--gold2);font-weight:700}
+  .card-frame{position:absolute;inset:0;border-radius:12px;border:2px solid;pointer-events:none}
+  .virtue-faith{color:#fff;background:var(--faith)} .virtue-mercy{color:#fff;background:var(--mercy)} .virtue-wisdom{color:#fff;background:var(--wisdom)} .virtue-generosity{color:#fff;background:var(--generosity)}
+  .frame-faith{border-color:#4a7bc888} .frame-mercy{border-color:#c84a6a88} .frame-wisdom{border-color:#7b4ac888} .frame-generosity{border-color:#4ac87b88}
+  .scoreboard{display:flex;justify-content:space-around;align-items:center;background:#1a0e0488;border:1px solid #c9a84c44;border-radius:8px;padding:10px 20px;flex-wrap:wrap;gap:10px}
+  .score-block{text-align:center}
+  .score-block .label{font-size:.75rem;color:#c9a84c99;text-transform:uppercase;letter-spacing:1px}
+  .score-block .value{font-size:1.8rem;color:var(--gold2);font-weight:700}
+  .zone{background:#1a0e0455;border:1px solid #c9a84c33;border-radius:8px;padding:12px;margin-top:10px}
+  .zone-title{font-size:.75rem;color:#c9a84c99;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+  .cards-row{display:flex;gap:10px;flex-wrap:wrap;min-height:80px;align-items:flex-end}
+  .challenge-area{background:linear-gradient(135deg,#1a0800,#2a1000);border:2px solid var(--gold);border-radius:10px;padding:14px;text-align:center;margin-top:10px}
+  .challenge-title{color:var(--gold2);font-size:1rem;margin-bottom:6px;font-weight:bold}
+  .challenge-text{font-size:.9rem;color:var(--cream);font-style:italic;line-height:1.5}
+  .challenge-virtue{margin-top:6px;font-size:.8rem;color:#c9a84c}
+  .btn{padding:9px 24px;border:1px solid var(--gold);background:linear-gradient(135deg,#3b1a00,#5a2800);color:var(--gold2);font-size:.85rem;letter-spacing:1px;cursor:pointer;border-radius:4px;transition:.2s}
+  .btn:hover{background:linear-gradient(135deg,#5a2800,#7a3800);box-shadow:0 0 12px #c9a84c44}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn-primary{background:linear-gradient(135deg,#7a4000,#b06000);border-color:var(--gold2)}
+  .btn-sm{padding:5px 14px;font-size:.75rem}
+  .msg-log{background:#0d060244;border:1px solid #c9a84c22;border-radius:6px;padding:8px 12px;max-height:90px;overflow-y:auto;font-size:.8rem;color:#c9a84c88;line-height:1.6;margin-top:10px}
+  .msg-log .msg{border-bottom:1px solid #c9a84c11;padding:1px 0}
+  .msg-log .msg.good{color:#4ac87b} .msg-log .msg.bad{color:#c84a6a} .msg-log .msg.info{color:var(--gold2)}
+  .mode-select{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:20px 0}
+  .mode-card{background:linear-gradient(135deg,#1a0800,#2a1200);border:2px solid #c9a84c66;border-radius:10px;padding:20px;width:220px;text-align:center;cursor:pointer;transition:.2s}
+  .mode-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 8px 24px #c9a84c22}
+  .mode-card h3{color:var(--gold2);margin-bottom:8px;font-size:1rem}
+  .mode-card p{font-size:.82rem;color:#c9a84c99;line-height:1.5}
+  .mode-card .icon{font-size:2.2rem;margin-bottom:8px}
+  .turn-banner{text-align:center;font-size:1.1rem;color:var(--gold2);padding:8px;background:#c9a84c11;border-radius:6px;border:1px solid #c9a84c33;margin-top:10px}
+  .round-info{font-size:.8rem;color:#c9a84c99;text-align:center;margin-top:4px}
+  .flex-center{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .instr h2{color:var(--gold2);margin:18px 0 8px;font-size:1.2rem;border-bottom:1px solid #c9a84c44;padding-bottom:4px}
+  .instr p,.instr li{font-size:.95rem;line-height:1.7;color:#e8d5b0;margin-bottom:4px}
+  .instr ul,.instr ol{padding-left:20px;margin-bottom:10px}
+  .virtue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:10px 0}
+  .virtue-box{padding:12px;border-radius:8px;border:1px solid #c9a84c44}
+  .virtue-box h4{font-size:.9rem;margin-bottom:4px}
+  .virtue-box p{font-size:.8rem;line-height:1.5}
+  .vb-faith{background:#4a7bc811;border-color:#4a7bc844} .vb-faith h4{color:#7aaaf0}
+  .vb-mercy{background:#c84a6a11;border-color:#c84a6a44} .vb-mercy h4{color:#f07a9a}
+  .vb-wisdom{background:#7b4ac811;border-color:#7b4ac844} .vb-wisdom h4{color:#b07af0}
+  .vb-generosity{background:#4ac87b11;border-color:#4ac87b44} .vb-generosity h4{color:#7af0aa}
+  .print-grid{display:grid;grid-template-columns:repeat(4,180px);gap:16px;justify-content:center;padding:20px}
+  @media print{body{background:#fff!important} body::before,body::after{display:none} header,.tabs,.no-print{display:none!important} #printPanel{display:block!important} .card-body{background:#f5ecd7!important} .card-name{color:#3b2008!important} .card-desc{color:#3b2008!important} .card-kp{color:#3b2008!important}}
+  .modal-overlay{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
+  .modal{background:linear-gradient(135deg,#1a0a00,#2e1200);border:2px solid var(--gold);border-radius:12px;padding:28px;max-width:440px;width:100%;text-align:center}
+  .modal h2{color:var(--gold2);font-size:1.4rem;margin-bottom:12px}
+  .modal p{color:#e8d5b0;line-height:1.6;margin-bottom:16px}
+  .modal .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+<header>
+  <h1>✝ Parables &amp; Providence ✝</h1>
+  <p>A Christian Strategy Card Game</p>
+</header>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('play',this)">🎮 Play</button>
+  <button class="tab" onclick="showTab('instructions',this)">📖 Instructions</button>
+  <button class="tab" onclick="showTab('print',this)">🖨️ Print Deck</button>
+</div>
+
+<div id="playPanel" class="panel active">
+  <div id="modeSelect">
+    <div style="text-align:center;padding:10px 0 4px">
+      <h2 style="color:var(--gold2);font-size:1.3rem">Choose Your Path</h2>
+      <p style="color:#c9a84c99;font-size:.9rem">How many will walk the narrow way?</p>
+    </div>
+    <div class="mode-select">
+      <div class="mode-card" onclick="startGame(1)">
+        <div class="icon">⚔️</div><h3>Single Player</h3>
+        <p>Face the Adversary AI across 7 rounds. Reach 21 Kingdom Points to win.</p>
+        <p style="margin-top:8px;color:var(--gold);font-size:.78rem">Difficulty:</p>
+        <select id="difficulty" onclick="event.stopPropagation()" style="background:#2a1000;color:var(--gold);border:1px solid #c9a84c44;padding:4px 8px;border-radius:4px;margin-top:4px;font-size:.85rem">
+          <option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option>
+        </select>
+      </div>
+      <div class="mode-card" onclick="startGame(2)"><div class="icon">👥</div><h3>2 Players</h3><p>Pass &amp; play with a friend. Take turns building Kingdom Points.</p></div>
+      <div class="mode-card" onclick="startGame(3)"><div class="icon">👨‍👩‍👧</div><h3>3 Players</h3><p>A three-way battle of biblical wisdom and strategy.</p></div>
+      <div class="mode-card" onclick="startGame(4)"><div class="icon">👨‍👩‍👧‍👦</div><h3>4 Players</h3><p>The full Kingdom Builder experience for four.</p></div>
+    </div>
+  </div>
+
+  <div id="gameBoard" class="hidden">
+    <div class="scoreboard" id="scoreboard"></div>
+    <div class="turn-banner" id="turnBanner">Your Turn</div>
+    <div class="round-info" id="roundInfo"></div>
+    <div class="challenge-area">
+      <div class="challenge-title">⚡ Challenge of the Round</div>
+      <div class="challenge-text" id="challengeText">—</div>
+      <div class="challenge-virtue" id="challengeVirtue"></div>
+    </div>
+    <div class="zone">
+      <div class="zone-title">⬆ Cards Played This Round</div>
+      <div class="cards-row" id="playedCards"></div>
+    </div>
+    <div class="zone">
+      <div class="zone-title" id="handLabel">✋ Your Hand</div>
+      <div class="cards-row" id="handCards"></div>
+    </div>
+    <div class="flex-center">
+      <button class="btn btn-primary" id="playBtn" onclick="playSelected()" disabled>Play Selected Card</button>
+      <button class="btn btn-sm" id="passBtn" onclick="passRound()">Pass (−1 KP)</button>
+      <button class="btn btn-sm" onclick="endGame(null,true)">Quit</button>
+    </div>
+    <div class="msg-log" id="msgLog"></div>
+  </div>
+
+  <div class="modal-overlay hidden" id="modal">
+    <div class="modal">
+      <h2 id="modalTitle"></h2>
+      <p id="modalBody"></p>
+      <div class="btns" id="modalBtns"></div>
+    </div>
+  </div>
+</div>
+
+<div id="instructionsPanel" class="panel instr">
+  <h2>📜 About Parables &amp; Providence</h2>
+  <p>A Christian strategy card game where players wield the teachings of Jesus to overcome challenges and build God's Kingdom. Each card represents one of the parables of Christ, carrying a virtue, a special ability, and Kingdom Points.</p>
+  <h2>🎯 Objective</h2>
+  <p><strong>Single Player:</strong> Earn 21 Kingdom Points before the Adversary across 7 rounds.</p>
+  <p><strong>Multiplayer (2–4):</strong> Most Kingdom Points after 7 rounds wins.</p>
+  <h2>🃏 The Cards</h2>
+  <p>12 parable cards. Each player draws 5 cards at the start. Each card shows: Parable Name &amp; Scripture, Virtue (Faith/Mercy/Wisdom/Generosity), Story Summary, Special Ability, and Kingdom Points (KP).</p>
+  <h2>⚡ Challenges</h2>
+  <p>Each round a Challenge card is revealed. Playing a card whose Virtue <em>matches</em> earns a <strong>+2 KP bonus</strong>.</p>
+  <h2>🔄 How to Play</h2>
+  <ol>
+    <li>A Challenge card is revealed for the round.</li>
+    <li>The active player selects and plays a card from their hand.</li>
+    <li>In multiplayer, players take turns. In single player, the AI plays after you.</li>
+    <li>KP are awarded based on card value + virtue match bonuses + special abilities.</li>
+    <li>After 7 rounds, the player with the most KP wins.</li>
+    <li>You may <strong>Pass</strong> instead of playing — but lose 1 KP.</li>
+  </ol>
+  <h2>✨ The Four Virtues</h2>
+  <div class="virtue-grid">
+    <div class="virtue-box vb-faith"><h4>⬡ Faith</h4><p>Bold trust in God. High KP and powerful effects.</p></div>
+    <div class="virtue-box vb-mercy"><h4>❤ Mercy</h4><p>Forgiveness and compassion. Can heal lost KP.</p></div>
+    <div class="virtue-box vb-wisdom"><h4>◆ Wisdom</h4><p>Strategic advantages — drawing cards, seeing ahead.</p></div>
+    <div class="virtue-box vb-generosity"><h4>✦ Generosity</h4><p>Multiplies blessings when shared.</p></div>
+  </div>
+  <h2>🤖 AI Difficulty</h2>
+  <ul><li><strong>Easy:</strong> Plays randomly.</li><li><strong>Medium:</strong> Tries to match the challenge virtue.</li><li><strong>Hard:</strong> Always optimizes for maximum KP.</li></ul>
+</div>
+
+<div id="printPanel" class="panel">
+  <div class="no-print flex-center" style="margin-bottom:16px;flex-direction:column;gap:8px">
+    <h2 style="color:var(--gold2);text-align:center">🖨️ Print Your Deck</h2>
+    <p style="color:#c9a84c99;text-align:center;font-size:.9rem">All 12 parable cards ready to print, cut, and play.</p>
+    <button class="btn btn-primary" onclick="window.print()">Print Deck Now</button>
+  </div>
+  <div class="print-grid" id="printGrid"></div>
+</div>
+
+<script>
+// ── SVG ART FUNCTIONS (defined first as declarations) ──
+function artProdigal(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b1000"/><stop offset="100%" stop-color="#8b3a00"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg1)"/><ellipse cx="90" cy="90" rx="70" ry="30" fill="#5c2000" opacity=".5"/><path d="M80 70 Q85 40 90 35 Q95 40 100 70" fill="#c9a84c" opacity=".8"/><circle cx="90" cy="30" r="10" fill="#f0d080"/><path d="M75 65 Q90 55 105 65" stroke="#f0d080" stroke-width="1.5" fill="none"/><path d="M50 75 L80 70 L80 90 L50 90Z" fill="#8b3a00"/><path d="M130 75 L100 70 L100 90 L130 90Z" fill="#8b3a00"/><circle cx="50" cy="60" r="8" fill="#f0a830" opacity=".7"/><text x="90" y="102" text-anchor="middle" fill="#f0d080" font-size="7" font-family="serif" opacity=".8">Welcomed Home</text></svg>';}
+function artSamaritan(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#001a10"/><stop offset="100%" stop-color="#005c30"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg2)"/><path d="M0 80 Q45 60 90 70 Q135 80 180 65 L180 105 L0 105Z" fill="#003d1a"/><path d="M60 55 L65 75 L55 75Z" fill="#c9a84c" opacity=".9"/><circle cx="62" cy="50" r="8" fill="#f0d080"/><path d="M100 60 L105 75 L95 75Z" fill="#8b3a00"/><circle cx="102" cy="55" r="7" fill="#c9a84c"/><path d="M90 70 Q96 65 102 68" stroke="#f0d080" stroke-width="2" fill="none"/><text x="90" y="102" text-anchor="middle" fill="#7af0aa" font-size="7" font-family="serif" opacity=".8">Love Thy Neighbour</text></svg>';}
+function artSower(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a1000"/><stop offset="100%" stop-color="#6b5000"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg3)"/><path d="M0 85 L180 70 L180 105 L0 105Z" fill="#3d2800"/><path d="M30 60 L35 80 L25 80Z" fill="#c9a84c"/><circle cx="32" cy="55" r="8" fill="#f0d080"/><path d="M45 50 L48 55M50 45 L52 51M55 48 L56 54M60 42 L60 49" stroke="#f0d080" stroke-width="1.5" stroke-linecap="round"/><path d="M100 75 L103 65 L106 75M115 72 L118 60 L121 72M130 74 L133 63 L136 74" fill="#4a8a00" stroke="#4a8a00" stroke-width="1"/><circle cx="155" cy="15" r="14" fill="#f0b030" opacity=".7"/><text x="90" y="102" text-anchor="middle" fill="#f0d080" font-size="7" font-family="serif" opacity=".8">Fertile Ground</text></svg>';}
+function artMustard(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0a1a00"/><stop offset="100%" stop-color="#305c00"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg4)"/><path d="M0 90 L180 90 L180 105 L0 105Z" fill="#1a3300"/><rect x="88" y="50" width="4" height="45" fill="#5c3a00"/><ellipse cx="90" cy="35" rx="30" ry="25" fill="#2a6a00"/><ellipse cx="70" cy="50" rx="20" ry="18" fill="#358000"/><ellipse cx="110" cy="48" rx="18" ry="16" fill="#3a7500"/><ellipse cx="90" cy="25" rx="15" ry="12" fill="#4a9000"/><circle cx="90" cy="53" r="4" fill="#f0d080"/><text x="90" y="102" text-anchor="middle" fill="#7af0aa" font-size="7" font-family="serif" opacity=".8">From Small Beginnings</text></svg>';}
+function artLostSheep(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#001020"/><stop offset="100%" stop-color="#003060"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg5)"/><path d="M0 80 Q90 65 180 75 L180 105 L0 105Z" fill="#001a3a"/><circle cx="40" cy="18" r="12" fill="#fff" opacity=".9"/><ellipse cx="40" cy="28" rx="14" ry="10" fill="#fff" opacity=".9"/><circle cx="35" cy="17" r="6" fill="#fff"/><circle cx="45" cy="15" r="5" fill="#fff"/><ellipse cx="40" cy="36" rx="3" ry="5" fill="#d4c8a0"/><ellipse cx="44" cy="37" rx="3" ry="5" fill="#d4c8a0"/><circle cx="32" cy="22" r="2" fill="#2a1800"/><path d="M130 40 L135 70 L125 70Z" fill="#c9a84c"/><circle cx="132" cy="35" r="9" fill="#f0d080"/><path d="M122 65 Q132 58 142 65" stroke="#f0d080" stroke-width="1.5" fill="none"/><text x="90" y="102" text-anchor="middle" fill="#7aaaf0" font-size="7" font-family="serif" opacity=".8">Found and Rejoiced</text></svg>';}
+function artTalents(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg6" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a1500"/><stop offset="100%" stop-color="#5c4a00"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg6)"/><path d="M0 80 L180 80 L180 105 L0 105Z" fill="#2a1800"/><circle cx="50" cy="55" r="15" fill="#c9a84c" opacity=".9"/><text x="50" y="60" text-anchor="middle" fill="#3b2000" font-size="14" font-family="serif" font-weight="bold">T</text><circle cx="90" cy="50" r="18" fill="#f0d080"/><text x="90" y="56" text-anchor="middle" fill="#3b2000" font-size="16" font-family="serif" font-weight="bold">T</text><circle cx="133" cy="55" r="15" fill="#c9a84c" opacity=".9"/><text x="133" y="60" text-anchor="middle" fill="#3b2000" font-size="14" font-family="serif" font-weight="bold">T</text><path d="M55 70 L55 80M90 68 L90 80M128 70 L128 80" stroke="#c9a84c" stroke-width="2"/><text x="90" y="102" text-anchor="middle" fill="#f0d080" font-size="7" font-family="serif" opacity=".8">Multiply His Gifts</text></svg>';}
+function artVirgins(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg7" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#100020"/><stop offset="100%" stop-color="#380060"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg7)"/><path d="M0 85 L180 85 L180 105 L0 105Z" fill="#1a0030"/><rect x="27" y="50" width="6" height="30" fill="#c9a84c"/><ellipse cx="30" cy="48" rx="5" ry="8" fill="#f0b030"/><circle cx="30" cy="36" r="7" fill="#f0d080"/><rect x="52" y="50" width="6" height="30" fill="#c9a84c"/><ellipse cx="55" cy="48" rx="5" ry="8" fill="#f0b030"/><circle cx="55" cy="36" r="7" fill="#f0d080"/><rect x="77" y="50" width="6" height="30" fill="#c9a84c"/><ellipse cx="80" cy="48" rx="5" ry="8" fill="#f0b030"/><circle cx="80" cy="36" r="7" fill="#f0d080"/><rect x="102" y="50" width="6" height="30" fill="#c9a84c" opacity=".3"/><ellipse cx="105" cy="48" rx="5" ry="8" fill="#604060" opacity=".5"/><circle cx="105" cy="36" r="7" fill="#f0d080" opacity=".4"/><rect x="127" y="50" width="6" height="30" fill="#c9a84c" opacity=".3"/><ellipse cx="130" cy="48" rx="5" ry="8" fill="#604060" opacity=".5"/><circle cx="130" cy="36" r="7" fill="#f0d080" opacity=".4"/><text x="90" y="102" text-anchor="middle" fill="#b07af0" font-size="7" font-family="serif" opacity=".8">Be Ready Always</text></svg>';}
+function artPearl(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg8" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#001520"/><stop offset="100%" stop-color="#004050"/></linearGradient><radialGradient id="pearlg"><stop offset="0%" stop-color="#fff"/><stop offset="40%" stop-color="#c0e0f0"/><stop offset="100%" stop-color="#6090b0"/></radialGradient></defs><rect width="180" height="105" fill="url(#pg8)"/><path d="M0 75 Q45 60 90 68 Q135 76 180 62 L180 105 L0 105Z" fill="#002030"/><circle cx="90" cy="45" r="28" fill="url(#pearlg)"/><ellipse cx="80" cy="35" rx="8" ry="5" fill="#fff" opacity=".5"/><circle cx="90" cy="45" r="28" fill="none" stroke="#c0e0f0" stroke-width="1.5" opacity=".6"/><text x="90" y="102" text-anchor="middle" fill="#7af0d0" font-size="7" font-family="serif" opacity=".8">Worth Everything</text></svg>';}
+function artRichFool(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg9" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0000"/><stop offset="100%" stop-color="#600000"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg9)"/><rect x="30" y="50" width="50" height="40" fill="#5c2000"/><rect x="100" y="40" width="50" height="50" fill="#7a2800"/><rect x="55" y="42" width="50" height="50" fill="#8b3400"/><path d="M30 50 L55 38 L80 50Z" fill="#6b2500"/><path d="M55 38 L80 28 L105 38 L80 50Z" fill="#8b3000"/><path d="M100 40 L125 30 L150 40Z" fill="#7a2800"/><circle cx="150" cy="15" r="10" fill="#f0d080" opacity=".6"/><text x="90" y="102" text-anchor="middle" fill="#f07070" font-size="7" font-family="serif" opacity=".8">Fool! This Night...</text></svg>';}
+function artPharisee(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg10" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#100a00"/><stop offset="100%" stop-color="#402000"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg10)"/><path d="M0 85 L180 85 L180 105 L0 105Z" fill="#200a00"/><path d="M50 55 L55 85 L45 85Z" fill="#c9a84c" opacity=".6"/><circle cx="52" cy="50" r="9" fill="#c9a84c" opacity=".7"/><rect x="44" y="30" width="16" height="6" fill="#f0d080" opacity=".5" rx="2"/><path d="M120 50 L125 85 L115 85Z" fill="#f0d080"/><circle cx="122" cy="45" r="9" fill="#f0d080"/><path d="M116 40 L118 30 L120 28 L122 30 L124 40" fill="none" stroke="#c9a84c" stroke-width="1.2"/><text x="90" y="102" text-anchor="middle" fill="#f0a870" font-size="7" font-family="serif" opacity=".8">The Humble Exalted</text></svg>';}
+function artUnforgiving(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg11" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0a0a1a"/><stop offset="100%" stop-color="#202050"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg11)"/><path d="M0 80 L180 80 L180 105 L0 105Z" fill="#10103a"/><path d="M60 50 L65 80 L55 80Z" fill="#c9a84c"/><circle cx="62" cy="45" r="9" fill="#f0d080"/><path d="M108 55 L113 80 L103 80Z" fill="#8080c0"/><circle cx="110" cy="50" r="8" fill="#a0a0e0"/><path d="M75 58 L95 62" stroke="#c84a6a" stroke-width="2" stroke-dasharray="3,3"/><path d="M90 55 L87 62 L93 62Z" fill="#c84a6a"/><text x="90" y="102" text-anchor="middle" fill="#8080f0" font-size="7" font-family="serif" opacity=".8">Forgive as Forgiven</text></svg>';}
+function artWedding(){return'<svg viewBox="0 0 180 105" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg12" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0a15"/><stop offset="100%" stop-color="#50103a"/></linearGradient></defs><rect width="180" height="105" fill="url(#pg12)"/><path d="M0 80 Q90 65 180 75 L180 105 L0 105Z" fill="#2a0520"/><path d="M70 20 L90 5 L110 20 L110 45 L70 45Z" fill="#3a0a28"/><path d="M75 45 L85 45 L85 30 L75 30Z" fill="#5a1540"/><path d="M95 45 L105 45 L105 30 L95 30Z" fill="#5a1540"/><rect x="78" y="18" width="24" height="2" fill="#f0d080" opacity=".6"/><ellipse cx="30" cy="72" rx="8" ry="10" fill="#f0d080" opacity=".7"/><circle cx="30" cy="60" r="6" fill="#f0c0a0"/><ellipse cx="58" cy="72" rx="8" ry="10" fill="#f0d080" opacity=".7"/><circle cx="58" cy="60" r="6" fill="#f0c0a0"/><ellipse cx="122" cy="72" rx="8" ry="10" fill="#f0d080" opacity=".7"/><circle cx="122" cy="60" r="6" fill="#f0c0a0"/><ellipse cx="150" cy="72" rx="8" ry="10" fill="#f0d080" opacity=".7"/><circle cx="150" cy="60" r="6" fill="#f0c0a0"/><text x="90" y="102" text-anchor="middle" fill="#f07ab0" font-size="7" font-family="serif" opacity=".8">All Are Invited</text></svg>';}
+
+// ── CARD DATA (after art functions) ──
+var CARDS=[
+  {id:'prodigal',name:'The Prodigal Son',scripture:'Luke 15:11-32',virtue:'mercy',desc:'A son returns to his father after squandering his inheritance, welcomed with joy.',ability:'Restore 2 KP you previously lost this game.',kp:4,art:artProdigal},
+  {id:'samaritan',name:'The Good Samaritan',scripture:'Luke 10:30-37',virtue:'mercy',desc:'A despised foreigner stops to help a wounded stranger when religious leaders passed by.',ability:'If played on a Mercy challenge, gain +3 KP instead of +2.',kp:4,art:artSamaritan},
+  {id:'sower',name:'The Sower',scripture:'Matthew 13:3-9',virtue:'faith',desc:'A farmer scatters seed on different soils — only the good soil yields a great harvest.',ability:'Draw 1 extra card from the deck.',kp:3,art:artSower},
+  {id:'mustard',name:'The Mustard Seed',scripture:'Matthew 13:31-32',virtue:'faith',desc:'The smallest of seeds grows into the greatest of trees, sheltering all birds.',ability:'Next round your card earns +1 KP bonus.',kp:2,art:artMustard},
+  {id:'lostsheep',name:'The Lost Sheep',scripture:'Luke 15:4-7',virtue:'mercy',desc:'A shepherd leaves 99 sheep to find the one that was lost, rejoicing when found.',ability:'Recover a previously played card back into your hand.',kp:3,art:artLostSheep},
+  {id:'talents',name:'The Talents',scripture:'Matthew 25:14-30',virtue:'generosity',desc:'Servants are given talents to invest. Those who multiply them are rewarded greatly.',ability:'Double your KP gain if you have played 3+ cards this game.',kp:5,art:artTalents},
+  {id:'virgins',name:'The Ten Virgins',scripture:'Matthew 25:1-13',virtue:'wisdom',desc:'Five wise virgins kept their lamps ready; five foolish ones missed the bridegroom.',ability:'See the next Challenge card before deciding.',kp:3,art:artVirgins},
+  {id:'pearl',name:'The Pearl of Great Price',scripture:'Matthew 13:45-46',virtue:'wisdom',desc:'A merchant sells everything to purchase the one pearl of supreme worth.',ability:'Sacrifice 2 KP to immediately gain 5 KP.',kp:3,art:artPearl},
+  {id:'richfool',name:'The Rich Fool',scripture:'Luke 12:16-21',virtue:'wisdom',desc:'A rich man builds bigger barns for himself, but God calls his soul that very night.',ability:'Any opponent who passes this round loses an extra 1 KP.',kp:2,art:artRichFool},
+  {id:'pharisee',name:'The Pharisee & Tax Collector',scripture:'Luke 18:9-14',virtue:'mercy',desc:'The humble tax collector\'s prayer is heard; the self-righteous Pharisee\'s is not.',ability:'If you are losing, gain +3 bonus KP this round.',kp:3,art:artPharisee},
+  {id:'unforgiving',name:'The Unforgiving Servant',scripture:'Matthew 18:23-35',virtue:'mercy',desc:'A forgiven servant refuses to forgive another — and faces severe consequences.',ability:'Force an opponent to lose 2 KP if they passed last round.',kp:3,art:artUnforgiving},
+  {id:'wedding',name:'The Wedding Banquet',scripture:'Matthew 22:1-14',virtue:'generosity',desc:'A king\'s invited guests refuse to come, so he fills the banquet with people from the streets.',ability:'All players gain 1 KP — yours included.',kp:4,art:artWedding},
+];
+
+var CHALLENGES=[
+  {text:'Temptation of Pride — those who exalt themselves shall be humbled.',virtue:'mercy',bonus:'Play a Mercy card to humble the proud.'},
+  {text:'A stranger is in need on the road. Will you stop?',virtue:'mercy',bonus:'A Mercy card triples the blessing.'},
+  {text:'You are tested in the wilderness. Only faith sustains.',virtue:'faith',bonus:'A Faith card stands firm against the trial.'},
+  {text:'The harvest is plentiful but the workers are few.',virtue:'generosity',bonus:'A Generosity card multiplies the harvest.'},
+  {text:'The enemy sows weeds among the wheat. Discern wisely.',virtue:'wisdom',bonus:'A Wisdom card separates truth from deception.'},
+  {text:'Your lamp burns low. Will you be ready when He comes?',virtue:'wisdom',bonus:'Wisdom lights the way forward.'},
+  {text:'A lost soul wanders far from home.',virtue:'mercy',bonus:'Mercy brings the lost one home.'},
+  {text:'A great treasure is hidden in a field. What will you give?',virtue:'faith',bonus:'Faith gives everything for the Kingdom.'},
+  {text:'The Kingdom of Heaven is offered freely. Will you accept?',virtue:'generosity',bonus:'Generosity opens the gates wide.'},
+  {text:'You are called to forgive seventy times seven.',virtue:'mercy',bonus:'Mercy echoes the Father\'s grace.'},
+  {text:'The narrow gate stands before you. Few find it.',virtue:'wisdom',bonus:'Wisdom discerns the narrow path.'},
+  {text:'You are entrusted with much. What will you do with it?',virtue:'generosity',bonus:'Generosity returns a hundredfold.'},
+];
+
+function virtueLabel(v){return{faith:'Faith',mercy:'Mercy',wisdom:'Wisdom',generosity:'Generosity'}[v]||v;}
+function virtueIcon(v){return{faith:'⬡',mercy:'❤',wisdom:'◆',generosity:'✦'}[v]||'';}
+
+function renderCard(card,opts){
+  opts=opts||{};
+  var div=document.createElement('div');
+  div.className='card'+(opts.played?' played':'');
+  if(opts.faceDown){div.className+=' face-down';div.textContent='✝';return div;}
+  if(opts.selectable) div.setAttribute('data-id',card.id);
+  var inner=document.createElement('div');
+  inner.className='card-inner';
+  var art=document.createElement('div');
+  art.className='card-art';
+  art.innerHTML=card.art();
+  var body=document.createElement('div');
+  body.className='card-body';
+  body.innerHTML='<div class="card-name">'+card.name+'</div>'
+    +'<div class="card-scripture">'+card.scripture+'</div>'
+    +'<span class="card-virtue virtue-'+card.virtue+'">'+virtueIcon(card.virtue)+' '+virtueLabel(card.virtue)+'</span>'
+    +'<div class="card-desc">'+card.desc+'</div>'
+    +'<div class="card-ability">✨ '+card.ability+'</div>';
+  var kp=document.createElement('div');
+  kp.className='card-kp';kp.textContent='⭐'+card.kp;
+  var frame=document.createElement('div');
+  frame.className='card-frame frame-'+card.virtue;
+  inner.appendChild(art);inner.appendChild(body);
+  div.appendChild(inner);div.appendChild(kp);div.appendChild(frame);
+  return div;
+}
+
+// ── GAME STATE ──
+var G={};
+
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function startGame(numPlayers){
+  var diff=document.getElementById('difficulty').value;
+  var deck=shuffle(CARDS.slice());
+  var challenges=shuffle(CHALLENGES.slice());
+  var names=numPlayers===1?['You','Adversary']:['Player 1','Player 2','Player 3','Player 4'].slice(0,numPlayers);
+  var players=[];
+  for(var i=0;i<numPlayers;i++){
+    players.push({name:names[i],kp:0,hand:[],played:[],isAI:numPlayers===1&&i===1,passed:false});
+  }
+  for(var c=0;c<5;c++) for(var p=0;p<players.length;p++){if(deck.length) players[p].hand.push(deck.pop());}
+  G={numPlayers:numPlayers,players:players,deck:deck,challenges:challenges,
+     round:1,maxRounds:7,currentChallenge:challenges.pop(),
+     activePlayer:0,pendingPlays:[],diff:diff,nextRoundBonus:{}};
+  document.getElementById('modeSelect').classList.add('hidden');
+  document.getElementById('gameBoard').classList.remove('hidden');
+  renderBoard();
+  log('✝ The journey begins. May wisdom guide your hand.','info');
+}
+
+function renderBoard(){
+  renderScoreboard();
+  renderChallenge();
+  renderPlayedCards();
+  renderHand();
+  document.getElementById('roundInfo').textContent='Round '+G.round+' of '+G.maxRounds;
+  var ap=G.players[G.activePlayer];
+  document.getElementById('turnBanner').textContent=(ap.isAI?'🤖 ':'')+ap.name+'\'s Turn';
+  document.getElementById('playBtn').disabled=true;
+}
+
+function renderScoreboard(){
+  var colors=['#4ac87b','#c84a6a','#4a7bc8','#c8a84a','#a84ac8'];
+  var sb=document.getElementById('scoreboard');
+  sb.innerHTML='';
+  G.players.forEach(function(p,i){
+    var d=document.createElement('div');d.className='score-block';
+    d.innerHTML='<div class="label"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+colors[i]+';margin-right:5px"></span>'+p.name+'</div><div class="value">'+p.kp+'</div><div style="font-size:.7rem;color:#c9a84c55">KP</div>';
+    sb.appendChild(d);
+    if(i<G.players.length-1){var sep=document.createElement('div');sep.style.cssText='color:#c9a84c44;font-size:1.5rem';sep.textContent='|';sb.appendChild(sep);}
+  });
+}
+
+function renderChallenge(){
+  var ch=G.currentChallenge;
+  document.getElementById('challengeText').textContent=ch.text;
+  document.getElementById('challengeVirtue').textContent=virtueIcon(ch.virtue)+' '+virtueLabel(ch.virtue)+' Challenge — '+ch.bonus;
+}
+
+function renderPlayedCards(){
+  var row=document.getElementById('playedCards');row.innerHTML='';
+  G.pendingPlays.forEach(function(pp){
+    var card=CARDS.find(function(c){return c.id===pp.cardId;});
+    if(card){var el=renderCard(card,{played:true});el.title=pp.playerName+': '+card.name;row.appendChild(el);}
+  });
+}
+
+var selectedCardId=null;
+
+function renderHand(){
+  var row=document.getElementById('handCards');row.innerHTML='';
+  var ap=G.players[G.activePlayer];
+  var label=document.getElementById('handLabel');
+  document.getElementById('passBtn').disabled=false;
+  if(ap.isAI){
+    label.textContent='🤖 Adversary is thinking…';
+    for(var i=0;i<ap.hand.length;i++) row.appendChild(renderCard(null,{faceDown:true}));
+    document.getElementById('playBtn').disabled=true;
+    document.getElementById('passBtn').disabled=true;
+    setTimeout(aiPlay,1400);
+    return;
+  }
+  label.textContent='✋ '+ap.name+'\'s Hand — click a card to select, then Play';
+  ap.hand.forEach(function(card){
+    var el=renderCard(card,{selectable:true});
+    el.addEventListener('click',function(){selectCard(card.id);});
+    row.appendChild(el);
+  });
+}
+
+function selectCard(id){
+  selectedCardId=id;
+  document.querySelectorAll('#handCards .card').forEach(function(c){
+    c.classList.toggle('selected',c.getAttribute('data-id')===id);
+  });
+  document.getElementById('playBtn').disabled=false;
+}
+
+function playSelected(){
+  if(!selectedCardId) return;
+  var ap=G.players[G.activePlayer];
+  var idx=ap.hand.findIndex(function(c){return c.id===selectedCardId;});
+  if(idx===-1) return;
+  var card=ap.hand.splice(idx,1)[0];
+  ap.played.push(card.id);
+  G.pendingPlays.push({playerName:ap.name,cardId:card.id,playerId:G.activePlayer});
+  ap.passed=false;
+  selectedCardId=null;
+  document.getElementById('playBtn').disabled=true;
+  resolvePlay(G.activePlayer,card);
+}
+
+function passRound(){
+  var ap=G.players[G.activePlayer];
+  ap.kp=Math.max(0,ap.kp-1);ap.passed=true;
+  var rfPlayed=G.pendingPlays.some(function(p){return p.cardId==='richfool';});
+  if(rfPlayed){ap.kp=Math.max(0,ap.kp-1);log('⚡ Rich Fool: passing costs an extra 1 KP!','bad');}
+  log(ap.name+' passes and loses 1 KP.','bad');
+  advanceTurn();
+}
+
+function resolvePlay(playerIdx,card){
+  var p=G.players[playerIdx];var ch=G.currentChallenge;
+  var earned=card.kp;var msgs=[];
+  if(card.virtue===ch.virtue){earned+=2;msgs.push('+2 virtue bonus!');}
+  if(G.nextRoundBonus&&G.nextRoundBonus[playerIdx]){earned+=G.nextRoundBonus[playerIdx];msgs.push('+'+G.nextRoundBonus[playerIdx]+' Mustard Seed bonus!');delete G.nextRoundBonus[playerIdx];}
+  if(card.id==='prodigal'){p.kp+=2;msgs.push('Prodigal Son: +2 KP restored!');}
+  if(card.id==='samaritan'&&card.virtue===ch.virtue){earned+=1;msgs.push('Good Samaritan: +1 extra!');}
+  if(card.id==='sower'){if(G.deck.length){p.hand.push(G.deck.pop());msgs.push('Sower: drew an extra card!');}}
+  if(card.id==='mustard'){G.nextRoundBonus[playerIdx]=(G.nextRoundBonus[playerIdx]||0)+1;msgs.push('Mustard Seed: +1 bonus stored for next round!');}
+  if(card.id==='lostsheep'){if(p.played.length>1){var recId=p.played[p.played.length-2];var rec=CARDS.find(function(c){return c.id===recId;});if(rec){p.hand.push(rec);msgs.push('Lost Sheep: recovered '+rec.name+'!');}}}
+  if(card.id==='talents'){if(p.played.length>=3){earned*=2;msgs.push('Talents: KP doubled!');}}
+  if(card.id==='pearl'){p.kp=Math.max(0,p.kp-2);earned+=5;msgs.push('Pearl: -2 KP, +5 KP!');}
+  if(card.id==='pharisee'){var losing=G.players.some(function(op){return op!==p&&op.kp>p.kp;});if(losing){earned+=3;msgs.push('Pharisee: +3 KP for being behind!');}}
+  if(card.id==='wedding'){G.players.forEach(function(op){op.kp+=1;});msgs.push('Wedding Banquet: all players +1 KP!');}
+  p.kp+=earned;
+  log(p.name+' plays '+card.name+' — +'+earned+' KP. '+msgs.join(' '),p.isAI?'bad':'good');
+  renderScoreboard();
+  advanceTurn();
+}
+
+function advanceTurn(){
+  renderPlayedCards();
+  var found=false;var next=G.activePlayer;
+  for(var i=1;i<=G.numPlayers;i++){
+    var idx=(G.activePlayer+i)%G.numPlayers;
+    var played=G.pendingPlays.some(function(pp){return pp.playerId===idx;});
+    if(!played&&!G.players[idx].passed){next=idx;found=true;break;}
+  }
+  if(!found){setTimeout(endRound,500);return;}
+  G.activePlayer=next;renderBoard();
+}
+
+function endRound(){
+  G.round++;
+  G.pendingPlays=[];
+  G.players.forEach(function(p){p.passed=false;});
+  if(G.numPlayers===1&&G.players[0].kp>=21){endGame(true);return;}
+  if(G.numPlayers===1&&G.players[1].kp>=21){endGame(false);return;}
+  if(G.round>G.maxRounds){endGame(null);return;}
+  G.currentChallenge=G.challenges.length>0?G.challenges.pop():CHALLENGES[Math.floor(Math.random()*CHALLENGES.length)];
+  G.players.forEach(function(p){if(G.deck.length&&p.hand.length<3) p.hand.push(G.deck.pop());});
+  G.activePlayer=0;
+  renderBoard();
+  log('━━━ Round '+G.round+' begins ━━━','info');
+}
+
+function endGame(won,quit){
+  var title,body;
+  if(quit){title='Game Ended';body='May you continue to seek His Kingdom. Come back soon!';}
+  else if(G.numPlayers===1){
+    if(won===true){title='✝ Victory!';body='You reached '+G.players[0].kp+' Kingdom Points! "Well done, good and faithful servant." — Matthew 25:21';}
+    else if(won===false){title='The Adversary Prevails';body='The Adversary reached '+G.players[1].kp+' KP. "Be strong and courageous." — Joshua 1:9';}
+    else{var w=G.players[0].kp>G.players[1].kp?'You win!':G.players[1].kp>G.players[0].kp?'Adversary wins!':'A draw!';title='Game Over';body=w+' You: '+G.players[0].kp+' KP | Adversary: '+G.players[1].kp+' KP';}
+  } else {
+    var sorted=G.players.slice().sort(function(a,b){return b.kp-a.kp;});
+    title='Game Over';
+    body=(sorted[0].kp===sorted[1].kp?'It\'s a tie!':'🏆 '+sorted[0].name+' wins!')+'<br>'+sorted.map(function(p,i){return(i+1)+'. '+p.name+': '+p.kp+' KP';}).join('<br>');
+  }
+  showModal(title,body,[
+    {label:'Play Again',fn:function(){hideModal();var n=G.numPlayers||1;G={};document.getElementById('gameBoard').classList.add('hidden');document.getElementById('msgLog').innerHTML='';startGame(n);}},
+    {label:'Main Menu',fn:function(){hideModal();G={};document.getElementById('gameBoard').classList.add('hidden');document.getElementById('msgLog').innerHTML='';document.getElementById('modeSelect').classList.remove('hidden');}}
+  ]);
+}
+
+function aiPlay(){
+  var ap=G.players[G.activePlayer];
+  if(!ap||!ap.isAI||ap.hand.length===0){passRound();return;}
+  var ch=G.currentChallenge;var card;
+  if(G.diff==='easy'){
+    card=ap.hand[Math.floor(Math.random()*ap.hand.length)];
+  } else if(G.diff==='medium'){
+    card=ap.hand.find(function(c){return c.virtue===ch.virtue;})||ap.hand.slice().sort(function(a,b){return b.kp-a.kp;})[0];
+  } else {
+    card=ap.hand.slice().sort(function(a,b){var va=b.kp+(b.virtue===ch.virtue?2:0);var vb=a.kp+(a.virtue===ch.virtue?2:0);return va-vb;})[0];
+  }
+  var idx=ap.hand.indexOf(card);
+  ap.hand.splice(idx,1);ap.played.push(card.id);
+  G.pendingPlays.push({playerName:ap.name,cardId:card.id,playerId:G.activePlayer});
+  ap.passed=false;
+  resolvePlay(G.activePlayer,card);
+}
+
+function showModal(title,body,btns){
+  document.getElementById('modalTitle').textContent=title;
+  document.getElementById('modalBody').innerHTML=body;
+  var bc=document.getElementById('modalBtns');bc.innerHTML='';
+  btns.forEach(function(b){var el=document.createElement('button');el.className='btn';el.textContent=b.label;el.onclick=b.fn;bc.appendChild(el);});
+  document.getElementById('modal').classList.remove('hidden');
+}
+function hideModal(){document.getElementById('modal').classList.add('hidden');}
+
+function log(msg,type){
+  var ml=document.getElementById('msgLog');
+  var d=document.createElement('div');d.className='msg'+(type?' '+type:'');d.textContent=msg;
+  ml.insertBefore(d,ml.firstChild);
+  while(ml.children.length>30) ml.removeChild(ml.lastChild);
+}
+
+function showTab(id,btn){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById(id+'Panel').classList.add('active');
+  btn.classList.add('active');
+  if(id==='print') buildPrintGrid();
+}
+
+function buildPrintGrid(){
+  var grid=document.getElementById('printGrid');
+  if(grid.children.length) return;
+  CARDS.forEach(function(card){grid.appendChild(renderCard(card,{}));});
+}
+</script>
+</body>
+</html>
